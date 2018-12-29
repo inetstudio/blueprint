@@ -8,7 +8,7 @@ if (search) {
     let find = require('find');
 
     let files = find.fileSync(/app\.scss/, packagesPath);
-    let content = '';
+    let content = '@import "./admin/project";\n';
 
     files.forEach(function (file) {
         content += '@import "../../'+file+'";\n';
@@ -27,7 +27,8 @@ mix.autoload({
 
 mix
     .js([
-        packagesPath+'/admin-panel/resources/assets/js/app.js'
+        packagesPath+'/admin-panel/resources/assets/js/app.js',
+        'resources/js/admin/project/app.js',
     ], 'admin/js/app.js')
     .extract([
         'jquery',

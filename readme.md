@@ -16,6 +16,6 @@
 - php artisan inetstudio:acl:roles:seed
 - php artisan inetstudio:acl:users:admin (admin / password)
 
-<p><strong>Rebuild admin panel front</strong></p>
+<p><strong>Build admin panel front</strong></p>
 
 - npm run dev
