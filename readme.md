@@ -2,6 +2,7 @@
 
 <p><strong>Prepare virtual machine</strong></p>
 
+- php artisan key:generate
 - composer install
 - php vendor/bin/homestead make
 - modify Homestead.yaml

@@ -24,17 +24,15 @@ class AppServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        if (Str::startsWith($this->app->request->getRequestUri(), '/back') || app()->runningInConsole()) {
+        if (Str::startsWith($this->app->request->getRequestUri(), config('app.url_prefix').'/back') || app()->runningInConsole()) {
             $this->app->register('Collective\Html\HtmlServiceProvider');
             $this->app->register('Cviebrock\EloquentSluggable\ServiceProvider');
-            $this->app->register('Maatwebsite\Excel\ExcelServiceProvider');
             $this->app->register('Yajra\DataTables\ButtonsServiceProvider');
             $this->app->register('Yajra\DataTables\DataTablesServiceProvider');
             $this->app->register('Yajra\DataTables\FractalServiceProvider');
             $this->app->register('Yajra\DataTables\HtmlServiceProvider');
 
             $loader->alias('DataTables', 'Yajra\DataTables\Facades\DataTables');
-            $loader->alias('Excel', 'Maatwebsite\Excel\Facades\Excel');
             $loader->alias('Form', 'Collective\Html\FormFacade');
             $loader->alias('Html', 'Collective\Html\HtmlFacade');
         }

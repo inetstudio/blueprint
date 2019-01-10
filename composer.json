@@ -45,7 +45,6 @@
                 "laravel/tinker",
                 "sven/artisan-view",
                 "laravelcollective/html",
-                "maatwebsite/excel",
                 "yajra/laravel-datatables-buttons",
                 "yajra/laravel-datatables-fractal",
                 "yajra/laravel-datatables-html",

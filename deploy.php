@@ -1,11 +1,12 @@
 <?php
 namespace Deployer;
 
-require 'recipe/laravel.php';
-require 'recipe/slack.php';
+require 'vendor/deployer/deployer/recipe/laravel.php';
+require 'vendor/deployer/recipes/recipe/slack.php';
+require 'vendor/deployer/recipes/recipe/yarn.php';
 
 // Project name
-set('application', 'Makeup');
+set('application', '');
 
 // Project repository
 set('repository', 'git@bitbucket.org:');
@@ -15,8 +16,8 @@ set('git_tty', true); // [Optional] Allocate tty for git on first deployment
 set('slack_webhook', '');
 set('slack_title', '');
 set('slack_text', '_{{user}}_ deploying `{{branch}}` to *{{target}}*');
-set('slack_success_text', 'Deploy to *{{target}}* successful');
-set('slack_failure_text', 'Deploy to *{{target}}* failed');
+set('slack_success_text', 'Deploy to *{{target}}* (_{{release_path}}_) successful');
+set('slack_failure_text', 'Deploy to *{{target}}* (_{{release_path}}_) failed');
 
 add('shared_files', []);
 add('shared_dirs', []);
@@ -49,6 +50,8 @@ host('')
     ->set('deploy_path', '');
 
 // Tasks
+after('deploy:vendors', 'yarn:install');
+
 desc('Prepare environment');
 task('files:permissions:artisan', function () {
     run("cd {{release_path}} && chmod +x artisan");
@@ -63,6 +66,11 @@ task('files:test_environment', function () {
 })->onStage('test');
 after('files:permissions:sitemap', 'files:test_environment');
 
+task('build:test:admin_assets', function () {
+    run('cd {{release_path}} && npm run dev');
+})->onStage('test');
+after('yarn:install', 'build:test:admin_assets');
+
 task('files:prod_environment', function () {
     run('mv {{release_path}}/.env.production {{release_path}}/.env');
     run('mv {{release_path}}/public/robots.txt.production {{release_path}}/public/robots.txt');
@@ -70,6 +78,11 @@ task('files:prod_environment', function () {
     run('rm {{release_path}}/public/robots.txt.test');
 })->onStage('production');
 after('files:permissions:sitemap', 'files:prod_environment');
+
+task('build:prod:admin_assets', function () {
+    run('cd {{release_path}} && npm run production');
+})->onStage('production');
+after('yarn:install', 'build:prod:admin_assets');
 
 desc('Execute artisan route:cache-separate');
 task('artisan:route:cache-separate', function () {
