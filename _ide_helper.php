@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.19 on 2018-12-28 01:58:09.
+ * Generated for Laravel 5.7.20 on 2019-01-10 16:13:20.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -7221,6 +7221,17 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Get the jobs that have been pushed.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function pushedJobs()
+        {
+            return \Illuminate\Support\Testing\Fakes\QueueFake::pushedJobs();
+        }
+        
+        /**
          * Get the connection name for the queue.
          *
          * @return string 
@@ -7763,6 +7774,17 @@ namespace Illuminate\Support\Facades {
         public static function pjax()
         {
             return \Illuminate\Http\Request::pjax();
+        }
+        
+        /**
+         * Determine if the request is the result of an prefetch call.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function prefetch()
+        {
+            return \Illuminate\Http\Request::prefetch();
         }
         
         /**
@@ -11634,25 +11656,25 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert that the given file exists.
          *
-         * @param string $path
-         * @return void 
+         * @param string|array $path
+         * @return $this 
          * @static 
          */ 
         public static function assertExists($path)
         {
-            \Illuminate\Filesystem\FilesystemAdapter::assertExists($path);
+            return \Illuminate\Filesystem\FilesystemAdapter::assertExists($path);
         }
         
         /**
          * Assert that the given file does not exist.
          *
-         * @param string $path
-         * @return void 
+         * @param string|array $path
+         * @return $this 
          * @static 
          */ 
         public static function assertMissing($path)
         {
-            \Illuminate\Filesystem\FilesystemAdapter::assertMissing($path);
+            return \Illuminate\Filesystem\FilesystemAdapter::assertMissing($path);
         }
         
         /**
@@ -13703,6 +13725,190 @@ namespace Laravelista\Ekko\Facades {
  
 }
 
+namespace Maatwebsite\Excel\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Excel {
+        
+        /**
+         * 
+         *
+         * @param object $export
+         * @param string|null $fileName
+         * @param string $writerType
+         * @throws \PhpOffice\PhpSpreadsheet\Exception
+         * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+         * @return \Maatwebsite\Excel\BinaryFileResponse 
+         * @static 
+         */ 
+        public static function download($export, $fileName, $writerType = null)
+        {
+            return \Maatwebsite\Excel\Excel::download($export, $fileName, $writerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $export
+         * @param string $filePath
+         * @param string|null $disk
+         * @param string $writerType
+         * @throws \PhpOffice\PhpSpreadsheet\Exception
+         * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+         * @return bool 
+         * @static 
+         */ 
+        public static function store($export, $filePath, $disk = null, $writerType = null)
+        {
+            return \Maatwebsite\Excel\Excel::store($export, $filePath, $disk, $writerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $export
+         * @param string $filePath
+         * @param string|null $disk
+         * @param string $writerType
+         * @return \Maatwebsite\Excel\PendingDispatch 
+         * @static 
+         */ 
+        public static function queue($export, $filePath, $disk = null, $writerType = null)
+        {
+            return \Maatwebsite\Excel\Excel::queue($export, $filePath, $disk, $writerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return \Maatwebsite\Excel\Reader|\Maatwebsite\Excel\PendingDispatch 
+         * @static 
+         */ 
+        public static function import($import, $filePath, $disk = null, $readerType = null)
+        {
+            return \Maatwebsite\Excel\Excel::import($import, $filePath, $disk, $readerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return array 
+         * @static 
+         */ 
+        public static function toArray($import, $filePath, $disk = null, $readerType = null)
+        {
+            return \Maatwebsite\Excel\Excel::toArray($import, $filePath, $disk, $readerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return \Maatwebsite\Excel\Collection 
+         * @static 
+         */ 
+        public static function toCollection($import, $filePath, $disk = null, $readerType = null)
+        {
+            return \Maatwebsite\Excel\Excel::toCollection($import, $filePath, $disk, $readerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param \Maatwebsite\Excel\ShouldQueue $import
+         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string $readerType
+         * @return \Maatwebsite\Excel\PendingDispatch 
+         * @static 
+         */ 
+        public static function queueImport($import, $filePath, $disk = null, $readerType = null)
+        {
+            return \Maatwebsite\Excel\Excel::queueImport($import, $filePath, $disk, $readerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $concern
+         * @param callable $handler
+         * @param string $event
+         * @static 
+         */ 
+        public static function extend($concern, $handler, $event = 'Maatwebsite\Excel\Events\BeforeWriting')
+        {
+            return \Maatwebsite\Excel\Excel::extend($concern, $handler, $event);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $fileName
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertDownloaded($fileName, $callback = null)
+        {
+            return \Maatwebsite\Excel\Fakes\ExcelFake::assertDownloaded($fileName, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertStored($filePath, $disk = null, $callback = null)
+        {
+            return \Maatwebsite\Excel\Fakes\ExcelFake::assertStored($filePath, $disk, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertQueued($filePath, $disk = null, $callback = null)
+        {
+            return \Maatwebsite\Excel\Fakes\ExcelFake::assertQueued($filePath, $disk, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertImported($filePath, $disk = null, $callback = null)
+        {
+            return \Maatwebsite\Excel\Fakes\ExcelFake::assertImported($filePath, $disk, $callback);
+        }
+         
+    }
+ 
+}
+
 namespace Laratrust { 
 
     /**
@@ -13977,190 +14183,6 @@ namespace Yajra\DataTables\Facades {
         public static function hasMacro($name)
         {
             return \Yajra\DataTables\DataTables::hasMacro($name);
-        }
-         
-    }
- 
-}
-
-namespace Maatwebsite\Excel\Facades { 
-
-    /**
-     * 
-     *
-     */ 
-    class Excel {
-        
-        /**
-         * 
-         *
-         * @param object $export
-         * @param string|null $fileName
-         * @param string $writerType
-         * @throws \PhpOffice\PhpSpreadsheet\Exception
-         * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
-         * @return \Maatwebsite\Excel\BinaryFileResponse 
-         * @static 
-         */ 
-        public static function download($export, $fileName, $writerType = null)
-        {
-            return \Maatwebsite\Excel\Excel::download($export, $fileName, $writerType);
-        }
-        
-        /**
-         * 
-         *
-         * @param object $export
-         * @param string $filePath
-         * @param string|null $disk
-         * @param string $writerType
-         * @throws \PhpOffice\PhpSpreadsheet\Exception
-         * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
-         * @return bool 
-         * @static 
-         */ 
-        public static function store($export, $filePath, $disk = null, $writerType = null)
-        {
-            return \Maatwebsite\Excel\Excel::store($export, $filePath, $disk, $writerType);
-        }
-        
-        /**
-         * 
-         *
-         * @param object $export
-         * @param string $filePath
-         * @param string|null $disk
-         * @param string $writerType
-         * @return \Maatwebsite\Excel\PendingDispatch 
-         * @static 
-         */ 
-        public static function queue($export, $filePath, $disk = null, $writerType = null)
-        {
-            return \Maatwebsite\Excel\Excel::queue($export, $filePath, $disk, $writerType);
-        }
-        
-        /**
-         * 
-         *
-         * @param object $import
-         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
-         * @param string|null $disk
-         * @param string|null $readerType
-         * @return \Maatwebsite\Excel\Reader|\Maatwebsite\Excel\PendingDispatch 
-         * @static 
-         */ 
-        public static function import($import, $filePath, $disk = null, $readerType = null)
-        {
-            return \Maatwebsite\Excel\Excel::import($import, $filePath, $disk, $readerType);
-        }
-        
-        /**
-         * 
-         *
-         * @param object $import
-         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
-         * @param string|null $disk
-         * @param string|null $readerType
-         * @return array 
-         * @static 
-         */ 
-        public static function toArray($import, $filePath, $disk = null, $readerType = null)
-        {
-            return \Maatwebsite\Excel\Excel::toArray($import, $filePath, $disk, $readerType);
-        }
-        
-        /**
-         * 
-         *
-         * @param object $import
-         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
-         * @param string|null $disk
-         * @param string|null $readerType
-         * @return \Maatwebsite\Excel\Collection 
-         * @static 
-         */ 
-        public static function toCollection($import, $filePath, $disk = null, $readerType = null)
-        {
-            return \Maatwebsite\Excel\Excel::toCollection($import, $filePath, $disk, $readerType);
-        }
-        
-        /**
-         * 
-         *
-         * @param \Maatwebsite\Excel\ShouldQueue $import
-         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
-         * @param string|null $disk
-         * @param string $readerType
-         * @return \Maatwebsite\Excel\PendingDispatch 
-         * @static 
-         */ 
-        public static function queueImport($import, $filePath, $disk = null, $readerType = null)
-        {
-            return \Maatwebsite\Excel\Excel::queueImport($import, $filePath, $disk, $readerType);
-        }
-        
-        /**
-         * 
-         *
-         * @param string $concern
-         * @param callable $handler
-         * @param string $event
-         * @static 
-         */ 
-        public static function extend($concern, $handler, $event = 'Maatwebsite\Excel\Events\BeforeWriting')
-        {
-            return \Maatwebsite\Excel\Excel::extend($concern, $handler, $event);
-        }
-        
-        /**
-         * 
-         *
-         * @param string $fileName
-         * @param callable|null $callback
-         * @static 
-         */ 
-        public static function assertDownloaded($fileName, $callback = null)
-        {
-            return \Maatwebsite\Excel\Fakes\ExcelFake::assertDownloaded($fileName, $callback);
-        }
-        
-        /**
-         * 
-         *
-         * @param string $filePath
-         * @param string|callable|null $disk
-         * @param callable|null $callback
-         * @static 
-         */ 
-        public static function assertStored($filePath, $disk = null, $callback = null)
-        {
-            return \Maatwebsite\Excel\Fakes\ExcelFake::assertStored($filePath, $disk, $callback);
-        }
-        
-        /**
-         * 
-         *
-         * @param string $filePath
-         * @param string|callable|null $disk
-         * @param callable|null $callback
-         * @static 
-         */ 
-        public static function assertQueued($filePath, $disk = null, $callback = null)
-        {
-            return \Maatwebsite\Excel\Fakes\ExcelFake::assertQueued($filePath, $disk, $callback);
-        }
-        
-        /**
-         * 
-         *
-         * @param string $filePath
-         * @param string|callable|null $disk
-         * @param callable|null $callback
-         * @static 
-         */ 
-        public static function assertImported($filePath, $disk = null, $callback = null)
-        {
-            return \Maatwebsite\Excel\Fakes\ExcelFake::assertImported($filePath, $disk, $callback);
         }
          
     }
@@ -18284,11 +18306,11 @@ namespace  {
 
     class Ekko extends \Laravelista\Ekko\Facades\Ekko {}
 
+    class Excel extends \Maatwebsite\Excel\Facades\Excel {}
+
     class Laratrust extends \Laratrust\LaratrustFacade {}
 
     class DataTables extends \Yajra\DataTables\Facades\DataTables {}
-
-    class Excel extends \Maatwebsite\Excel\Facades\Excel {}
 
     class Form extends \Collective\Html\FormFacade {}
 
