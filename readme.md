@@ -2,14 +2,15 @@
 
 <p><strong>Prepare virtual machine</strong></p>
 
-- php artisan key:generate
 - composer install
 - php vendor/bin/homestead make
 - modify Homestead.yaml
 - vagrant up
 - vagrant ssh
 - mv .env.local .env
-- yarn
+- php artisan key:generate
+- php artisan storage:link
+- yarn install
 
 <p><strong>Prepare DB</strong></p>
 

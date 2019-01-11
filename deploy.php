@@ -64,7 +64,7 @@ task('files:test_environment', function () {
     run('rm {{release_path}}/.env.production');
     run('rm {{release_path}}/public/robots.txt.production');
 })->onStage('test');
-after('files:permissions:sitemap', 'files:test_environment');
+after('deploy:shared', 'files:test_environment');
 
 task('build:test:admin_assets', function () {
     run('cd {{release_path}} && npm run dev');
@@ -77,7 +77,7 @@ task('files:prod_environment', function () {
     run('rm {{release_path}}/.env.test');
     run('rm {{release_path}}/public/robots.txt.test');
 })->onStage('production');
-after('files:permissions:sitemap', 'files:prod_environment');
+after('deploy:shared', 'files:prod_environment');
 
 task('build:prod:admin_assets', function () {
     run('cd {{release_path}} && npm run production');

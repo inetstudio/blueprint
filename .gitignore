@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 /public/admin
+/public/mix-manifest.json
 .phpunit.result.cache
 Homestead.json
 npm-debug.log
