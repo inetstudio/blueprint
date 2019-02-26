@@ -16,7 +16,8 @@
         "inetstudio/admin-panel": "1.7.*",
         "inetstudio/pages": "1.7.*",
         "laravel/framework": "5.7.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "sentry/sentry-laravel": "^1.0.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.5",

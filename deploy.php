@@ -1,6 +1,7 @@
 <?php
 namespace Deployer;
 
+require 'app/Utils/Deployer/recipes/sentry.php';
 require 'vendor/deployer/deployer/recipe/laravel.php';
 require 'vendor/deployer/recipes/recipe/slack.php';
 require 'vendor/deployer/recipes/recipe/yarn.php';
@@ -12,6 +13,18 @@ set('application', '');
 set('repository', 'git@bitbucket.org:');
 set('branch', 'master');
 set('git_tty', true); // [Optional] Allocate tty for git on first deployment
+
+set('sentry_repository_name', '');
+set('sentry', [
+    'environment' => get('target'),
+    'organization' => 'inetstudio',
+    'projects' => [
+        'skin-ru-backend',
+    ],
+    'token' => '',
+    'version' => trim(exec('git --git-dir ' . realpath('.git') . ' describe --tags')).'-PROJECT_NAME',
+    'url' => 'https://bitbucket.org/',
+]);
 
 set('slack_webhook', '');
 set('slack_title', '');
@@ -50,6 +63,8 @@ host('')
     ->set('deploy_path', '');
 
 // Tasks
+before('deploy', 'slack:notify');
+
 after('deploy:vendors', 'yarn:install');
 
 desc('Prepare environment');
@@ -109,5 +124,7 @@ after('deploy:failed', 'deploy:unlock');
 // Migrate database before symlink new release.
 
 before('deploy:symlink', 'artisan:migrate');
+
+after('success', 'deploy:sentry');
 after('success', 'slack:notify:success');
 after('deploy:failed', 'slack:notify:failure');
