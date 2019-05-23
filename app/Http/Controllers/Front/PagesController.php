@@ -23,7 +23,7 @@ class PagesController extends Controller
         $seoService = app()->make('InetStudio\Meta\Contracts\Services\Front\MetaServiceContract');
 
         $cacheKey = 'pagesService_getItemBySlug_'.md5($slug);
-        $page = Cache::remember($cacheKey, 144000, function () use ($pagesService, $slug) {
+        $page = Cache::remember($cacheKey, now()->addDays(100), function () use ($pagesService, $slug) {
             return $pagesService->getItemBySlug($slug);
         });
 

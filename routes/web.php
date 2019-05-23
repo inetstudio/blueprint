@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['namespace' => 'Front'], function() {
     // Regular Requests
     Route::get('/{slug?}', 'PagesController@getPage')->name('front.pages.get');
