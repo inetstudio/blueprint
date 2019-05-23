@@ -1340,16 +1340,16 @@
         },
         {
             "name": "inetstudio/admin-panel",
-            "version": "v1.8.18",
+            "version": "v1.8.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inetstudio/admin-panel.git",
-                "reference": "5d71b1e437882d7bd27c85c001eb6a9a2ca2615b"
+                "reference": "775f15467cbdf21cdddb3fe1cd7d13e3d4a36433"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inetstudio/admin-panel/zipball/5d71b1e437882d7bd27c85c001eb6a9a2ca2615b",
-                "reference": "5d71b1e437882d7bd27c85c001eb6a9a2ca2615b",
+                "url": "https://api.github.com/repos/inetstudio/admin-panel/zipball/775f15467cbdf21cdddb3fe1cd7d13e3d4a36433",
+                "reference": "775f15467cbdf21cdddb3fe1cd7d13e3d4a36433",
                 "shasum": ""
             },
             "require": {
@@ -1400,7 +1400,7 @@
             ],
             "description": "Package for admin panel",
             "homepage": "https://github.com/inetstudio/admin-panel",
-            "time": "2019-05-21T08:54:13+00:00"
+            "time": "2019-05-23T19:21:57+00:00"
         },
         {
             "name": "inetstudio/meta",

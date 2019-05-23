@@ -36,7 +36,7 @@ mix
     ], 'admin/js/app.js')
     .extract([
         'jquery',
-        'bootstrap-sass',
+        'bootstrap',
         'vue'
     ])
     .sass('resources/sass/app.scss', 'admin/css/app.css', {
