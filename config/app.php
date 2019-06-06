@@ -166,6 +166,8 @@ return [
         /*
          * Package Service Providers...
          */
+        InetStudio\PagesPackage\Providers\ServiceProvider::class,
+        InetStudio\PagesPackage\Pages\Providers\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -175,6 +177,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        App\Providers\Bindings\AppBindingsServiceProvider::class,
+        App\Providers\Bindings\PagesPackage\Pages\BindingsServiceProvider::class,
 
     ],
 

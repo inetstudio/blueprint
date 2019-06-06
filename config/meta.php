@@ -46,8 +46,13 @@ return [
             'fields' => [],
         ],
         'og_image' => [
-            'og_image' => 'og_image_default',
-            'preview' => 'preview_3_2',
+            'og_image' => [
+                'og_image_default',
+            ],
+            'preview' => [
+                'preview_vertical',
+                'preview_default',
+            ]
         ],
     ],
 

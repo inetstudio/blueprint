@@ -40,6 +40,8 @@
     "extra": {
         "laravel": {
             "dont-discover": [
+                "inetstudio/pages",
+
                 "barryvdh/laravel-debugbar",
                 "cviebrock/eloquent-sluggable",
                 "laravel/tinker",

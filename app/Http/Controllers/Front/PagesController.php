@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Cache;
+use InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract as PagesServiceContract;
 
 /**
  * Class PagesController.
@@ -13,29 +14,20 @@ class PagesController extends Controller
     /**
      * Получаем страницу статичного материала.
      *
-     * @param string $slug
+     * @param  PagesServiceContract  $pagesService
+     * @param  string  $slug
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function getPage(string $slug = 'index')
+    public function getPage(PagesServiceContract $pagesService, string $slug = 'index'): Response
     {
-        $pagesService = app()->make('InetStudio\Pages\Contracts\Services\Front\PagesServiceContract');
-        $seoService = app()->make('InetStudio\Meta\Contracts\Services\Front\MetaServiceContract');
-
-        $cacheKey = 'pagesService_getItemBySlug_'.md5($slug);
-        $page = Cache::remember($cacheKey, now()->addDays(100), function () use ($pagesService, $slug) {
-            return $pagesService->getItemBySlug($slug);
-        });
-
-        if (! $page) {
-            abort(404);
-        }
+        $item = $pagesService->getItemBySlug($slug);
 
         $view = 'front.pages.'.$slug;
 
         return response()->view($view, [
-            'SEO' => $seoService->getAllTags($page),
-            'item' => $page,
+            'SEO' => $item['meta'],
+            'item' => $item,
         ]);
     }
 }
