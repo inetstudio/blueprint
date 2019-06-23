@@ -13,8 +13,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'Front'], function() {
-    // Regular Requests
-    Route::get('/{slug?}', 'PagesController@getPage')->name('front.pages.get');
-});
-
+Route::group(
+    [
+        'namespace' => '\App\Entities\PagesPackage\Pages\Http\Controllers\Front'
+    ],
+    function () {
+        // Regular Requests
+        Route::get('/', 'ItemsController@getIndex')->name('front.pages.index.get');
+    }
+);

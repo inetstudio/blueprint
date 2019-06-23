@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transformers\Front\MetaPackage\Meta;
+namespace Packages\MetaPackage\Meta\Transformers\Front;
 
 use Illuminate\Support\Arr;
 use App\Transformers\BaseTransformer;

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Providers\Bindings;
+namespace Packages\CachePackage\Cache\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
- * Class AppBindingsServiceProvider.
+ * Class BindingsServiceProvider.
  */
-class AppBindingsServiceProvider extends ServiceProvider implements DeferrableProvider
+class BindingsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * @var array
      */
     public $bindings = [
-        'CacheService' => 'App\Services\Front\Cache\CacheService',
+        'CacheService' => 'Packages\CachePackage\Cache\Services\Front\Cache\CacheService',
     ];
 
     /**

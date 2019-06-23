@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers\Bindings\PagesPackage\Pages;
+namespace Packages\PagesPackage\Pages\Providers;
 
 use Illuminate\Contracts\Foundation\Application;
 use InetStudio\PagesPackage\Pages\Providers\BindingsServiceProvider as PackageBindingsServiceProvider;
@@ -8,7 +8,7 @@ use InetStudio\PagesPackage\Pages\Providers\BindingsServiceProvider as PackageBi
 /**
  * Class BindingsServiceProvider.
  */
-class BindingsServiceProvider extends PackageBindingsServiceProvider
+final class BindingsServiceProvider extends PackageBindingsServiceProvider
 {
     /**
      * BindingsServiceProvider constructor.
@@ -19,6 +19,6 @@ class BindingsServiceProvider extends PackageBindingsServiceProvider
     {
         parent::__construct($app);
 
-        $this->bindings['InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract'] = 'App\Services\Front\PagesPackage\Pages\ItemsService';
+        $this->bindings['InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract'] = 'Packages\PagesPackage\Pages\Services\Front\ItemsService';
     }
 }

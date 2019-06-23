@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Transformers\Front\PagesPackage\Pages;
+namespace Packages\PagesPackage\Pages\Transformers\Front;
 
 use Exception;
 use League\Fractal\Resource\Item;
 use App\Transformers\BaseTransformer;
 use App\Transformers\Front\Objects\SelfTransformer;
-use App\Transformers\Front\MetaPackage\Meta\MetaTransformer;
+use Packages\MetaPackage\Meta\Transformers\Front\MetaTransformer;
 use InetStudio\PagesPackage\Pages\Contracts\Models\PageModelContract;
 
 /**
- * Class PageTransformer.
+ * Class ItemTransformer.
  */
-final class PageTransformer extends BaseTransformer
+final class ItemTransformer extends BaseTransformer
 {
     /**
      * @var array

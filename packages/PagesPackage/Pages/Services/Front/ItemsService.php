@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Services\Front\PagesPackage\Pages;
+namespace Packages\PagesPackage\Pages\Services\Front;
 
 use Illuminate\Support\Facades\Cache;
-use App\Transformers\Front\PagesPackage\Pages\PageTransformer;
-use InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract;
+use Packages\PagesPackage\Pages\Transformers\Front\ItemTransformer;
 use InetStudio\PagesPackage\Pages\Services\Front\ItemsService as PackageItemsService;
 
 /**
  * Class ItemsService.
  */
-final class ItemsService extends PackageItemsService implements ItemsServiceContract
+final class ItemsService extends PackageItemsService
 {
     /**
      * Получаем объект по slug.
@@ -40,8 +39,8 @@ final class ItemsService extends PackageItemsService implements ItemsServiceCont
             return app()->make('CacheService')
                 ->cacheItems(
                     collect([$item]),
-                    (new PageTransformer()),
-                    ['branding'],
+                    (new ItemTransformer()),
+                    [],
                     [$cacheKey]
                 )->first();
         };

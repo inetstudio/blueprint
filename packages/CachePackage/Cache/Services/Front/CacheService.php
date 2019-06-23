@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Front\Cache;
+namespace Packages\CachePackage\Cache\Services\Front\Cache;
 
 use League\Fractal\Manager;
 use Illuminate\Cache\FileStore;
@@ -14,7 +14,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 /**
  * Trait CacheService.
  */
-Class CacheService
+final class CacheService
 {
     /**
      * @var Manager
@@ -37,15 +37,19 @@ Class CacheService
     /**
      * Кэшируем результаты запросов.
      *
-     * @param Collection $items
-     * @param TransformerAbstract $transformer
-     * @param array $includes
-     * @param array $additionalCacheKeys
+     * @param  Collection  $items
+     * @param  TransformerAbstract  $transformer
+     * @param  array  $includes
+     * @param  array  $additionalCacheKeys
      *
      * @return Collection
      */
-    public function cacheItems(Collection $items, TransformerAbstract $transformer, array $includes = [], array $additionalCacheKeys = []): Collection
-    {
+    public function cacheItems(
+        Collection $items,
+        TransformerAbstract $transformer,
+        array $includes = [],
+        array $additionalCacheKeys = []
+    ): Collection {
         $data = [];
 
         $transformCacheKey = md5(get_class($transformer).json_encode($includes));
@@ -77,8 +81,8 @@ Class CacheService
     /**
      * Добавляем ключи в группу.
      *
-     * @param string $groupKey
-     * @param array $additionalCacheKeys
+     * @param  string  $groupKey
+     * @param  array  $additionalCacheKeys
      */
     public function addKeysToCacheGroup(string $groupKey, array $additionalCacheKeys): void
     {
@@ -125,7 +129,7 @@ Class CacheService
     /**
      * Очищаем кэш по группе ключей.
      *
-     * @param string $groupKey
+     * @param  string  $groupKey
      */
     public function clearCacheGroup(string $groupKey): void
     {
@@ -160,7 +164,7 @@ Class CacheService
     /**
      * Инициализируем менеджера трансформации.
      *
-     * @param array $includes
+     * @param  array  $includes
      *
      * @return Manager
      *
@@ -182,7 +186,7 @@ Class CacheService
     /**
      * Возвращаем ключи группы.
      *
-     * @param string $groupKey
+     * @param  string  $groupKey
      *
      * @return array
      */
@@ -193,7 +197,7 @@ Class CacheService
         if ($this->cacheStore instanceof RedisStore) {
             $prefix = $this->cacheStore->getPrefix();
 
-            $tagKey = 'tag:' . $groupKey . ':key';
+            $tagKey = 'tag:'.$groupKey.':key';
             $setKey = Cache::get($tagKey);
             $setMembersKeys = $this->cacheStore->connection()->smembers($prefix.$setKey.':forever_ref');
 

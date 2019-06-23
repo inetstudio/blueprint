@@ -178,8 +178,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        App\Providers\Bindings\AppBindingsServiceProvider::class,
-        App\Providers\Bindings\PagesPackage\Pages\BindingsServiceProvider::class,
+        Packages\CachePackage\Cache\Providers\BindingsServiceProvider::class,
+        Packages\PagesPackage\Pages\Providers\BindingsServiceProvider::class,
 
     ],
 
