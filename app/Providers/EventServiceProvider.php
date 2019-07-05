@@ -15,8 +15,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
+        'InetStudio\PagesPackage\Pages\Contracts\Events\Back\ModifyItemEventContract' => [
+            'Packages\PagesPackage\Pages\Listeners\Front\ClearItemCache',
         ],
     ];
 

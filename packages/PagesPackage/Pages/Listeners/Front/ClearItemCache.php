@@ -1,13 +1,13 @@
 <?php
 
-namespace Packages\PagesPackage\Pages\Listeners\Back;
+namespace Packages\PagesPackage\Pages\Listeners\Front;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
- * Class ClearItemsCache.
+ * Class ClearItemCache.
  */
-final class ClearItemsCache
+final class ClearItemCache
 {
     /**
      * Handle the event.

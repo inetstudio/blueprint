@@ -2,14 +2,14 @@
 
 namespace Packages\PagesPackage\Pages\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
+use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
 use Packages\PagesPackage\Pages\Http\Responses\Front\PageResponse;
 use InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract as PagesServiceContract;
 
 /**
  * Class ItemsController.
  */
-class ItemsController extends Controller
+final class ItemsController extends Controller
 {
     /**
      * Получаем страницу статичного материала.

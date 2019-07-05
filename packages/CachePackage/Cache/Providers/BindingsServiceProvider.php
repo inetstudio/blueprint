@@ -8,7 +8,7 @@ use Illuminate\Contracts\Support\DeferrableProvider;
 /**
  * Class BindingsServiceProvider.
  */
-class BindingsServiceProvider extends ServiceProvider implements DeferrableProvider
+final class BindingsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * @var array
