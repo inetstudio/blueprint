@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c6ec895bb86b1f0873ecea5f0456b41",
+    "content-hash": "b54132a8730245f7ab0398c4e5908221",
     "packages": [
         {
             "name": "arcanedev/php-html",
@@ -1277,6 +1277,53 @@
             "time": "2019-10-02T11:44:04+00:00"
         },
         {
+            "name": "inetstudio/addresses",
+            "version": "v6.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inetstudio/addresses.git",
+                "reference": "faa713b65a429a44eb45ae32a953807c00369783"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inetstudio/addresses/zipball/faa713b65a429a44eb45ae32a953807c00369783",
+                "reference": "faa713b65a429a44eb45ae32a953807c00369783",
+                "shasum": ""
+            },
+            "require": {
+                "inetstudio/admin-panel": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InetStudio\\AddressesPackage\\Providers\\ServiceProvider",
+                        "InetStudio\\AddressesPackage\\Points\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\AddressesPackage\\Points\\Providers\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InetStudio\\AddressesPackage\\": "package/src",
+                    "InetStudio\\AddressesPackage\\Points\\": "entities/points/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Bukin",
+                    "email": "bukin@inetstudio.ru"
+                }
+            ],
+            "description": "Package for addresses",
+            "homepage": "https://github.com/inetstudio/addresses",
+            "time": "2019-10-02T10:55:06+00:00"
+        },
+        {
             "name": "inetstudio/admin-panel",
             "version": "v6.0.3",
             "source": {
@@ -1432,6 +1479,114 @@
             "time": "2019-10-04T13:14:00+00:00"
         },
         {
+            "name": "inetstudio/checks-contest",
+            "version": "v6.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inetstudio/checks-contest.git",
+                "reference": "006b67b57e46ba297399e72e9c4037c02da42782"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inetstudio/checks-contest/zipball/006b67b57e46ba297399e72e9c4037c02da42782",
+                "reference": "006b67b57e46ba297399e72e9c4037c02da42782",
+                "shasum": ""
+            },
+            "require": {
+                "inetstudio/admin-panel": "^6.0",
+                "inetstudio/classifiers": "^6.0",
+                "inetstudio/fns": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InetStudio\\ChecksContest\\Providers\\ServiceProvider",
+                        "InetStudio\\ChecksContest\\Checks\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\ChecksContest\\Checks\\Providers\\ServiceProvider",
+                        "InetStudio\\ChecksContest\\Prizes\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\ChecksContest\\Prizes\\Providers\\ServiceProvider",
+                        "InetStudio\\ChecksContest\\Products\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\ChecksContest\\Products\\Providers\\ServiceProvider",
+                        "InetStudio\\ChecksContest\\Statuses\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\ChecksContest\\Statuses\\Providers\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InetStudio\\ChecksContest\\": "package/src",
+                    "InetStudio\\ChecksContest\\Checks\\": "entities/checks/src",
+                    "InetStudio\\ChecksContest\\Prizes\\": "entities/prizes/src",
+                    "InetStudio\\ChecksContest\\Products\\": "entities/products/src",
+                    "InetStudio\\ChecksContest\\Statuses\\": "entities/statuses/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Bukin",
+                    "email": "bukin@inetstudio.ru"
+                }
+            ],
+            "description": "Package for checks contest",
+            "homepage": "https://github.com/inetstudio/checks-contest",
+            "time": "2019-10-16T19:53:29+00:00"
+        },
+        {
+            "name": "inetstudio/classifiers",
+            "version": "v6.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inetstudio/classifiers.git",
+                "reference": "b392a3a0499deb526c17eccd2029eb43b6b83cd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inetstudio/classifiers/zipball/b392a3a0499deb526c17eccd2029eb43b6b83cd1",
+                "reference": "b392a3a0499deb526c17eccd2029eb43b6b83cd1",
+                "shasum": ""
+            },
+            "require": {
+                "inetstudio/admin-panel": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InetStudio\\Classifiers\\Providers\\ServiceProvider",
+                        "InetStudio\\Classifiers\\Entries\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\Classifiers\\Entries\\Providers\\ServiceProvider",
+                        "InetStudio\\Classifiers\\Groups\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\Classifiers\\Groups\\Providers\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InetStudio\\Classifiers\\": "package/src/",
+                    "InetStudio\\Classifiers\\Entries\\": "entities/entries/src/",
+                    "InetStudio\\Classifiers\\Groups\\": "entities/groups/src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Bukin",
+                    "email": "bukin@inetstudio.ru"
+                }
+            ],
+            "description": "Package for classifiers",
+            "homepage": "https://github.com/inetstudio/classifiers",
+            "time": "2019-10-02T11:06:45+00:00"
+        },
+        {
             "name": "inetstudio/feedback",
             "version": "v6.0.3",
             "source": {
@@ -1478,6 +1633,58 @@
             "description": "Package for feedback",
             "homepage": "https://github.com/inetstudio/feedback",
             "time": "2019-10-04T13:13:24+00:00"
+        },
+        {
+            "name": "inetstudio/fns",
+            "version": "v6.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inetstudio/fns.git",
+                "reference": "403da6068f926f3b81cfeab993f4b21db73d6cc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inetstudio/fns/zipball/403da6068f926f3b81cfeab993f4b21db73d6cc4",
+                "reference": "403da6068f926f3b81cfeab993f4b21db73d6cc4",
+                "shasum": ""
+            },
+            "require": {
+                "inetstudio/addresses": "^6.0",
+                "inetstudio/admin-panel": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InetStudio\\Fns\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\Fns\\Providers\\ServiceProvider",
+                        "InetStudio\\Fns\\Accounts\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\Fns\\Accounts\\Providers\\ServiceProvider",
+                        "InetStudio\\Fns\\Receipts\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\Fns\\Receipts\\Providers\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InetStudio\\Fns\\": "package/src",
+                    "InetStudio\\Fns\\Accounts\\": "entities/accounts/src",
+                    "InetStudio\\Fns\\Receipts\\": "entities/receipts/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Bukin",
+                    "email": "bukin@inetstudio.ru"
+                }
+            ],
+            "description": "Package for fns integration",
+            "homepage": "https://github.com/inetstudio/fns",
+            "time": "2019-10-02T11:55:53+00:00"
         },
         {
             "name": "inetstudio/meta",

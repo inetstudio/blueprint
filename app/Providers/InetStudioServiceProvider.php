@@ -37,10 +37,14 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->configIsCached = $this->app->configurationIsCached();
 
         $this->bootAclPackage($router);
+        $this->bootAddressesPackage();
         $this->bootAdminPanelPackage();
         $this->bootCachePackage();
         $this->bootCaptchaPackage();
+        $this->bootChecksContestPackage();
+        $this->bootClassifiersPackage();
         $this->bootFeedbackPackage();
+        $this->bootFnsPackage();
         $this->bootMainpagePackage();
         $this->bootMetaPackage();
         $this->bootPagesPackage();
@@ -179,6 +183,28 @@ class InetStudioServiceProvider extends ServiceProvider
         $router->aliasMiddleware('role', 'Laratrust\Middleware\LaratrustRole');
         $router->aliasMiddleware('permission', 'Laratrust\Middleware\LaratrustPermission');
         $router->aliasMiddleware('ability', 'Laratrust\Middleware\LaratrustAbility');
+    }
+
+    /**
+     * Addresses Package Boot.
+     */
+    protected function bootAddressesPackage(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                'InetStudio\AddressesPackage\Points\Console\Commands\ProcessPointsByAhunterCommand',
+            ]);
+        }
+
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/addresses/entities/points/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/addresses/entities/points/resources/views', 'admin.module.addresses.points');
+
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/addresses/entities/points/config/services.php', 'services'
+            );
+        }
     }
 
     /**
@@ -400,6 +426,101 @@ class InetStudioServiceProvider extends ServiceProvider
     }
 
     /**
+     * ChecksContest Package Boot.
+     */
+    protected function bootChecksContestPackage(): void
+    {
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/package/resources/views', 'admin.module.checks-contest');
+
+        // Checks
+        if ($this->app->runningInConsole()) {
+            $this->commands(
+                [
+                    'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\AttachFnsReceiptsCommandContract',
+                    'InetStudio\ChecksContest\Checks\Console\Commands\AttachProductsCommand',
+                    'InetStudio\ChecksContest\Checks\Console\Commands\CreateFoldersCommand',
+                    'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\ModerateChecksCommandContract',
+                    'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\RecognizeCodesCommandContract',
+                    'InetStudio\ChecksContest\Checks\Console\Commands\RemoveDuplicatesCommand',
+                    'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\SetWinnerCommandContract',
+                ]
+            );
+        }
+
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/checks/routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../../packages/checks-contest/entities/checks/routes/api.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/checks/resources/views', 'admin.module.checks-contest.checks');
+        $this->loadViewsFrom(__DIR__.'/../../packages/checks-contest/entities/checks/resources/views', 'packages.checks-contest.checks.app');
+        view()->getFinder()->prependNamespace('admin.module.checks-contest.checks', __DIR__.'/../../packages/checks-contest/entities/checks/resources/views');
+
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/checks-contest/entities/checks/config/filesystems.php',
+                'filesystems.disks'
+            );
+
+            $this->mergeConfigFrom(
+                __DIR__.'/../../packages/checks-contest/entities/checks/config/checks_contest_checks.php',
+                'checks_contest_checks'
+            );
+        }
+
+        // Prizes
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/prizes/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/prizes/resources/views', 'admin.module.checks-contest.prizes');
+
+        // Products
+
+        // Statuses
+        if (! $this->app->runningInConsole()) {
+            $this->commands(
+                [
+                    'InetStudio\ChecksContest\Statuses\Console\Commands\SetupCommand',
+                    'InetStudio\ChecksContest\Statuses\Console\Commands\StatusesSeedCommand',
+                ]
+            );
+        }
+
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/statuses/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/statuses/resources/views', 'admin.module.checks-contest.statuses');
+    }
+
+    /**
+     * Classifiers Package Boot.
+     */
+    protected function bootClassifiersPackage(): void
+    {
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/classifiers/package/resources/views', 'admin.module.classifiers');
+
+        // Entries
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/classifiers/entities/entries/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/classifiers/entities/entries/resources/views', 'admin.module.classifiers.entries');
+        view()->getFinder()->prependNamespace('admin.module.classifiers.entries', __DIR__.'/../../packages/classifiers/entities/entries/resources/views');
+
+        FormBuilder::component(
+            'classifiers',
+            'admin.module.classifiers.entries::back.forms.fields.entries',
+            ['name' => null, 'value' => null, 'attributes' => null]
+        );
+
+        // Groups
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/classifiers/entities/groups/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/classifiers/entities/groups/resources/views', 'admin.module.classifiers.groups');
+        view()->getFinder()->prependNamespace('admin.module.classifiers.groups', __DIR__.'/../../packages/classifiers/entities/groups/resources/views');
+
+        FormBuilder::component(
+            'classifiers_groups',
+            'admin.module.classifiers.groups::back.forms.fields.groups',
+            ['name' => null, 'value' => null, 'attributes' => null]
+        );
+    }
+
+    /**
      * Feedback Package Boot.
      */
     protected function bootFeedbackPackage(): void
@@ -421,6 +542,31 @@ class InetStudioServiceProvider extends ServiceProvider
 
         Event::listen('InetStudio\ACL\Activations\Contracts\Events\Front\ActivatedEventContract', 'InetStudio\FeedbackPackage\Feedback\Contracts\Listeners\Front\AttachUserToItemsListenerContract');
         Event::listen('InetStudio\ACL\Users\Contracts\Events\Front\SocialRegisteredEventContract', 'InetStudio\FeedbackPackage\Feedback\Contracts\Listeners\Front\AttachUserToItemsListenerContract');
+    }
+
+    /**
+     * Fns Package Boot.
+     */
+    protected function bootFnsPackage(): void
+    {
+        // Accounts
+        if ($this->app->runningInConsole()) {
+            $this->commands(
+                [
+                    'InetStudio\Fns\Accounts\Console\Commands\GenerateAccountsCommand',
+                    'InetStudio\Fns\Accounts\Console\Commands\ResetAccountsBlockingCommand',
+                ]
+            );
+        }
+
+        // Receipts
+        if ($this->app->runningInConsole()) {
+            $this->commands(
+                [
+                    'InetStudio\Fns\Receipts\Console\Commands\AttachPointsToReceiptsCommand',
+                ]
+            );
+        }
     }
 
     /**

@@ -13,6 +13,7 @@
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
         "inetstudio/admin-panel": "^6.0",
+        "inetstudio/checks-contest": "^6.0",
         "inetstudio/feedback": "^6.0",
         "inetstudio/pages": "^6.0",
         "inetstudio/sitemap": "^6.0",
@@ -41,10 +42,14 @@
         "laravel": {
             "dont-discover": [
                 "inetstudio/acl",
+                "inetstudio/addresses",
                 "inetstudio/admin-panel",
                 "inetstudio/cache",
+                "inetstudio/checks-contest",
                 "inetstudio/captcha",
+                "inetstudio/classifiers",
                 "inetstudio/feedback",
+                "inetstudio/fns",
                 "inetstudio/meta",
                 "inetstudio/pages",
                 "inetstudio/search",

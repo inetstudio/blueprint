@@ -9,12 +9,21 @@
                 </ul>
             </li>
 
+            <li class="{{ areActiveRoutes(['back.classifiers.*']) }}">
+                <a href="#"><i class="fa fa-copy"></i> <span class="nav-label">Справочники </span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    @include('admin.module.classifiers::back.includes.navigation')
+                </ul>
+            </li>
+
             <li class="{{ areActiveRoutes(['back.feedback.*']) }}">
                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Данные </span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     @include('admin.module.feedback::back.includes.navigation')
                 </ul>
             </li>
+
+            @include('admin.module.checks-contest::back.includes.navigation')
 
             @include('admin.module.acl::back.includes.navigation')
         </ul>
