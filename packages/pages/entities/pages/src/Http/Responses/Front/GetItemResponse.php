@@ -20,8 +20,7 @@ final class GetItemResponse extends BaseResponse
      */
     protected $queryParams = [
         'columns' => ['content'],
-        'relations' => ['meta', 'media', 'custom_fields'],
-        'includes' => ['branding'],
+        'relations' => ['meta', 'media'],
     ];
 
     /**

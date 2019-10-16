@@ -25,7 +25,6 @@ final class ItemTransformer extends BaseTransformer
      */
     protected $availableIncludes = [
         'objects',
-        'branding',
     ];
 
     /**
@@ -76,22 +75,6 @@ final class ItemTransformer extends BaseTransformer
     public function includeMeta(PageModelContract $item): Item
     {
         $transformer = $this->getTransformer('Packages\MetaPackage\Meta\Transformers\Front\MetaTransformer');
-
-        return $this->item($item, $transformer);
-    }
-
-    /**
-     * Включаем брендирование в трансформацию.
-     *
-     * @param  PageModelContract  $item
-     *
-     * @return Item
-     *
-     * @throws BindingResolutionException
-     */
-    public function includeBranding(PageModelContract $item): Item
-    {
-        $transformer = $this->getTransformer('Packages\CustomFieldsPackage\Fields\Transformers\Front\BrandingTransformer');
 
         return $this->item($item, $transformer);
     }

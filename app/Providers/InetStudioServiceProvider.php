@@ -39,6 +39,7 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->bootAclPackage($router);
         $this->bootAdminPanelPackage();
         $this->bootCachePackage();
+        $this->bootCaptchaPackage();
         $this->bootFeedbackPackage();
         $this->bootMainpagePackage();
         $this->bootMetaPackage();
@@ -48,6 +49,11 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->bootSitemapPackage();
         $this->bootUploadsPackage();
         $this->bootWidgetsPackage();
+    }
+
+    public function register(): void
+    {
+        \Ekko::enableGlobalHelpers();
     }
 
     /**
@@ -191,10 +197,9 @@ class InetStudioServiceProvider extends ServiceProvider
 
         if (! $this->configIsCached) {
             foreach (['audit', 'medialibrary', 'sentry', 'ziggy'] as $config) {
-                $this->mergeConfigFrom(
-                    __DIR__.'/../../packages/admin-panel/entities/base/config/'.$config.'.php',
-                    $config
-                );
+                $this->app['config']->set($config, array_merge(
+                    $this->app['config']->get($config, []), require __DIR__.'/../../packages/admin-panel/entities/base/config/'.$config.'.php'
+                ));
             }
         }
 
@@ -382,6 +387,19 @@ class InetStudioServiceProvider extends ServiceProvider
     }
 
     /**
+     * Captcha Package Boot.
+     */
+    protected function bootCaptchaPackage(): void
+    {
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../packages/captcha/entities/captcha/config/captcha.php',
+                'captcha'
+            );
+        }
+    }
+
+    /**
      * Feedback Package Boot.
      */
     protected function bootFeedbackPackage(): void
@@ -390,6 +408,7 @@ class InetStudioServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/feedback/entities/feedback/resources/views', 'admin.module.feedback');
         view()->getFinder()->prependNamespace('admin.module.feedback', __DIR__.'/../../packages/feedback/entities/feedback/resources/views');
+        $this->loadViewsFrom(__DIR__.'/../../packages/feedback/entities/feedback/resources/views', 'packages.feedback.app');
 
         $this->loadTranslationsFrom(__DIR__.'/../../vendor/inetstudio/feedback/entities/feedback/resources/lang', 'feedback');
 

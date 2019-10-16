@@ -33,9 +33,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        $uri = $this->app->request->getRequestUri();
+        $uri = trim($this->app->request->getRequestUri(), '/');
         $isConsole = $this->app->runningInConsole();
-        $monitoringStop = Carbon::createFromTimestamp(config('app.release_time', time()), config('app.timezone'))->addDays(3);
+        $monitoringStop = Carbon::createFromTimestamp(config('app.release_time', time()), config('app.timezone'))->addDays(7);
         $now = Carbon::now();
 
         if ($monitoringStop->greaterThan($now) || config('app.debug')) {
@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
             $loader->alias('Sentry', 'Sentry\Laravel\Facade');
         }
 
-        if (Str::startsWith($uri, '/back') || $isConsole) {
+        if (Str::startsWith($uri, trim(config('app.url_prefix').'/back', '/')) || $isConsole) {
             $this->app->register('Collective\Html\HtmlServiceProvider');
             $this->app->register('Cviebrock\EloquentSluggable\ServiceProvider');
             $this->app->register('Tightenco\Ziggy\ZiggyServiceProvider');
@@ -57,7 +57,7 @@ class AppServiceProvider extends ServiceProvider
             $loader->alias('Html', 'Collective\Html\HtmlFacade');
         }
 
-        if (Str::contains($uri, '/export/') || $isConsole) {
+        if (Str::contains($uri, '/export') || $isConsole) {
             $this->app->register('Maatwebsite\Excel\ExcelServiceProvider');
 
             $loader->alias('Excel', 'Maatwebsite\Excel\Facades\Excel');
