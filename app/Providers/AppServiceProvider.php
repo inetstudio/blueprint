@@ -22,8 +22,12 @@ class AppServiceProvider extends ServiceProvider
     {
         Relation::morphMap(
             [
+                'checks_contest_checks' => 'InetStudio\ChecksContest\Checks\Models\CheckModel',
+                'checks_contest_prizes' => 'InetStudio\ChecksContest\Prizes\Models\PrizeModel',
+                'checks_contest_products' => 'InetStudio\ChecksContest\Products\Models\ProductModel',
+                'checks_contest_statuses' => 'InetStudio\ChecksContest\Statuses\Models\StatusModel',
                 'meta' => 'InetStudio\MetaPackage\Meta\Models\MetaModel',
-                'pages' => 'Packages\PagesPackage\Pages\Models\PageModel',
+                'pages' => 'InetStudio\PagesPackage\Pages\Models\PageModel',
                 'widgets' => 'InetStudio\Widgets\Models\WidgetModel',
             ]
         );

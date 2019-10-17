@@ -474,7 +474,7 @@ class InetStudioServiceProvider extends ServiceProvider
         // Products
 
         // Statuses
-        if (! $this->app->runningInConsole()) {
+        if ($this->app->runningInConsole()) {
             $this->commands(
                 [
                     'InetStudio\ChecksContest\Statuses\Console\Commands\SetupCommand',

@@ -15,6 +15,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        'InetStudio\FeedbackPackage\Feedback\Contracts\Events\Front\SendItemEventContract' => [
+            'InetStudio\FeedbackPackage\Feedback\Contracts\Listeners\SendEmailToAdminListenerContract',
+        ],
         'InetStudio\PagesPackage\Pages\Contracts\Events\Back\ModifyItemEventContract' => [
             'Packages\PagesPackage\Pages\Listeners\Front\ClearItemCache',
         ],

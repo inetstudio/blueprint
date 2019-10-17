@@ -23,6 +23,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('inetstudio:checks-contest:checks:winners')->dailyAt('00:30');
+        $schedule->command('inetstudio:checks-contest:checks:recognize-codes')->everyMinute();
+        $schedule->command('inetstudio:checks-contest:checks:remove-duplicates')->everyMinute();
+        $schedule->command('inetstudio:checks-contest:checks:fns')->hourly();
     }
 
     /**

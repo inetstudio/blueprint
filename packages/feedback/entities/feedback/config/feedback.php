@@ -6,15 +6,12 @@ return [
      * Настройки писем
      */
 
-    'mails' => [
-        'to' => '',
-        'subject' => 'Сообщение с формы обратной связи',
-        'headers' => [],
-    ],
-
-    'mails_users' => [
+    'mails_admins' => [
         'send' => true,
-        'subject' => 'Ответ на сообщение',
+        'to' => [
+            '',
+        ],
+        'subject' => 'Новое сообщение',
         'headers' => [],
     ],
 

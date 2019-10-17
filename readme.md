@@ -17,6 +17,7 @@
 - php artisan migrate
 - php artisan inetstudio:acl:roles:seed
 - php artisan inetstudio:acl:users:admin (admin / password)
+- php artisan inetstudio:checks-contest:statuses:seed
 
 <p><strong>Build admin panel front</strong></p>
 
