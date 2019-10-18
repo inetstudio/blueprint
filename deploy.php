@@ -76,7 +76,7 @@ desc('Execute artisan route:cache-separate');
 task('artisan:route:cache-separate', function () {
     run('{{bin/php}} {{release_path}}/artisan route:cache-separate');
 });
-after('artisan:config:cache', 'artisan:route:cache-separate');
+after('artisan:optimize', 'artisan:route:cache-separate');
 
 desc('Restart PHP-FPM service');
 task('php-fpm:restart', function () {

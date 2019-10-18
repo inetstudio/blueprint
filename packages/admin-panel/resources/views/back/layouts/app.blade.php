@@ -9,7 +9,7 @@
 
     <link rel="icon" href="{!! asset('favicon.ico') !!}">
 
-    <link href="{{ mix('admin/css/app.css', '/admin/') }}" rel="stylesheet">
+    <link href="{{ asset(mix('admin/css/app.css', '/admin/')) }}" rel="stylesheet">
 </head>
 <body class="">
 
@@ -43,10 +43,10 @@
 <div id="modules-components">
     <div :id="moduleName+'_components'" v-for="(module, moduleName) in modules" :key="moduleName">
         <component
-                :is="component.name"
-                v-for="component in module.components"
-                :key="component.name" :ref="moduleName+'_'+component.name"
-                v-bind="component.data"
+            :is="component.name"
+            v-for="component in module.components"
+            :key="component.name" :ref="moduleName+'_'+component.name"
+            v-bind="component.data"
         />
     </div>
 </div>
@@ -56,9 +56,9 @@
 
 @routes('back')
 
-<script src="{{ mix('admin/js/manifest.js', '/admin/') }}"></script>
-<script src="{{ mix('admin/js/vendor.js', '/admin/') }}"></script>
-<script src="{{ mix('admin/js/app.js', '/admin/') }}"></script>
+<script src="{{ asset(mix('admin/js/manifest.js', '/admin/')) }}"></script>
+<script src="{{ asset(mix('admin/js/vendor.js', '/admin/')) }}"></script>
+<script src="{{ asset(mix('admin/js/app.js', '/admin/')) }}"></script>
 
 @stack('scripts')
 
