@@ -19,14 +19,14 @@ class Kernel extends ConsoleKernel
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         $schedule->command('inetstudio:checks-contest:checks:winners')->dailyAt('00:30');
         $schedule->command('inetstudio:checks-contest:checks:recognize-codes')->everyMinute();
         $schedule->command('inetstudio:checks-contest:checks:remove-duplicates')->everyMinute();
         $schedule->command('inetstudio:checks-contest:checks:fns')->hourly();
+        $schedule->command('inetstudio:checks-contest:checks:moderate')->everyMinute();
     }
 
     /**

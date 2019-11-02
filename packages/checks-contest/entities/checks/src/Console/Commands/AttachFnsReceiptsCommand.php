@@ -30,8 +30,8 @@ class AttachFnsReceiptsCommand extends PackageAttachFnsReceiptsCommand
         $status = $statusesService->getDefaultStatus();
 
         $checks = $checksService->getModel()->where([
-                ['status_id', '=', $status->id],
-            ])
+            ['status_id', '=', $status->id],
+        ])
             ->doesntHave('fnsReceipt')
             ->orderBy('created_at', 'desc')
             ->where('created_at', '>',
@@ -99,7 +99,6 @@ class AttachFnsReceiptsCommand extends PackageAttachFnsReceiptsCommand
             if ($fnsReceipt) {
                 $check->fns_receipt_id = $fnsReceipt->id ?? 0;
                 $check->products()->createMany($products);
-                $check->setJSONData('receipt_data', 'receipt', Arr::except($fnsReceiptData, ['items']));
                 $check->save();
             }
 

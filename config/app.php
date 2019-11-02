@@ -179,7 +179,7 @@ return [
         InetStudio\CachePackage\Cache\Providers\BindingsServiceProvider::class,
         Packages\ChecksContest\Checks\Providers\BindingsServiceProvider::class,
         InetStudio\ChecksContest\Prizes\Providers\BindingsServiceProvider::class,
-        InetStudio\ChecksContest\Products\Providers\BindingsServiceProvider::class,
+        Packages\ChecksContest\Products\Providers\BindingsServiceProvider::class,
         InetStudio\ChecksContest\Statuses\Providers\BindingsServiceProvider::class,
         InetStudio\Classifiers\Entries\Providers\BindingsServiceProvider::class,
         InetStudio\Classifiers\Groups\Providers\BindingsServiceProvider::class,

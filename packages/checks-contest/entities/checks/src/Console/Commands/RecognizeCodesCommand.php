@@ -38,6 +38,10 @@ class RecognizeCodesCommand extends PackageRecognizeCodesCommand
             if (! $check->hasJSONData('receipt_data', 'codes')) {
                 $imagePath = $check->getFirstMediaPath('images');
 
+                if (! $imagePath) {
+                    continue;
+                }
+
                 $response = $client->request(
                     'POST',
                     config('checks_contest_checks.recognize_barcode_service'),

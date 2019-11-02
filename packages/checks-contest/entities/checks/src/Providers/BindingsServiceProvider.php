@@ -20,6 +20,7 @@ final class BindingsServiceProvider extends PackageBindingsServiceProvider
         parent::__construct($app);
 
         $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Console\Commands\AttachFnsReceiptsCommandContract'] = 'Packages\ChecksContest\Checks\Console\Commands\AttachFnsReceiptsCommand';
+        $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Console\Commands\ModerateChecksCommandContract'] = 'Packages\ChecksContest\Checks\Console\Commands\ModerateChecksCommand';
         $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Console\Commands\RecognizeCodesCommandContract'] = 'Packages\ChecksContest\Checks\Console\Commands\RecognizeCodesCommand';
         $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Console\Commands\SetWinnerCommandContract'] = 'Packages\ChecksContest\Checks\Console\Commands\SetWinnerCommand';
         $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Exports\ItemsExportContract'] = 'Packages\ChecksContest\Checks\Exports\ItemsExport';

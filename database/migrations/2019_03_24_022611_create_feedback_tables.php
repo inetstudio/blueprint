@@ -17,6 +17,7 @@ class CreateFeedbackTables extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->increments('id');
+            $table->nullableMorphs('feedbackable');
             $table->boolean('is_read')->default(0);
             $table->string('user_id')->default(0);
             $table->string('name');
