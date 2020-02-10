@@ -2,13 +2,14 @@
 
 namespace Packages\PagesPackage\Pages\Http\Responses\Front;
 
-use InetStudio\AdminPanel\Base\Http\Responses\BaseResponse;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Responsable;
 use InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract as PagesServiceContract;
 
 /**
  * Class GetItemResponse.
  */
-final class GetItemResponse extends BaseResponse
+final class GetItemResponse implements Responsable
 {
     /**
      * @var PagesServiceContract
@@ -31,65 +32,33 @@ final class GetItemResponse extends BaseResponse
     public function __construct(PagesServiceContract $pagesService)
     {
         $this->pagesService = $pagesService;
-
-        $this->abortOnEmptyData = true;
-        $this->view = 'packages.pages.app::front.pages.';
     }
 
     /**
-     * Prepare response data.
+     * Возвращаем ответ.
      *
-     * @param $request
+     * @param  Request  $request
      *
-     * @return array
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    protected function prepare($request): array
+    public function toResponse($request)
     {
         $slug = $request->route('slug');
 
         $item = $this->pagesService->getItemBySlug($slug, $this->queryParams);
 
         if (! $item) {
-            return [];
+            abort(404);
         }
 
-        $isPromo = $request->get('promo', false);
+        $view = 'packages.pages.app::front.pages.';
+        $view = (view()->exists($view.$slug)) ? $view.$slug : $view.'default';
 
-        if ($slug == 'policy') {
-            $rules = $this->pagesService->getItemBySlug('rules', $this->queryParams);
+        $data = [
+            'SEO' => $item['meta'],
+            'item' => $item,
+        ];
 
-            if (! $rules) {
-                return [];
-            }
-
-            $view = 'policy';
-
-            $data = [
-                'SEO' => $item['meta'],
-                'items' => [
-                    'policy' => $item,
-                    'rules' => $rules,
-                ],
-            ];
-        } else {
-            if ($isPromo && ! view()->exists($this->view.'promo.'.$slug)) {
-                return [];
-            }
-
-            if ($isPromo) {
-                $view = 'promo.'.$slug;
-            } else {
-                $view = (view()->exists($this->view.$slug)) ? $slug : 'default';
-            }
-
-            $data = [
-                'SEO' => $item['meta'],
-                'item' => $item,
-            ];
-        }
-
-        $this->view .= $view;
-
-        return $data;
+        return view($view, $data);
     }
 }

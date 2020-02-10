@@ -4,7 +4,6 @@ namespace Packages\MainPagePackage\MainPage\Http\Controllers\Front;
 
 use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
 use Packages\MainPagePackage\MainPage\Http\Responses\Front\GetItemResponse;
-use Packages\MainPagePackage\MainPage\Http\Responses\Front\GetSocialWidgetResponse;
 
 /**
  * Class IndexController.

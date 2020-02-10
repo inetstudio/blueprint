@@ -2,7 +2,8 @@
 
 namespace Packages\MainPagePackage\MainPage\Http\Responses\Front;
 
-use InetStudio\AdminPanel\Base\Http\Responses\BaseResponse;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Responsable;
 use Packages\MainPagePackage\MainPage\Services\Front\MainPageService;
 use InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract as PagesServiceContract;
 use InetStudio\ChecksContest\Checks\Contracts\Services\Front\ItemsServiceContract as ChecksServiceContract;
@@ -10,7 +11,7 @@ use InetStudio\ChecksContest\Checks\Contracts\Services\Front\ItemsServiceContrac
 /**
  * Class GetItemResponse.
  */
-final class GetItemResponse extends BaseResponse
+final class GetItemResponse implements Responsable
 {
     /**
      * @var MainPageService
@@ -42,19 +43,16 @@ final class GetItemResponse extends BaseResponse
         $this->mainPageService = $mainPageService;
         $this->pagesService = $pagesService;
         $this->checksService = $checksService;
-
-        $this->abortOnEmptyData = true;
-        $this->view = 'packages.mainpage.app::front.pages.index';
     }
 
     /**
-     * Prepare response data.
+     * Возвращаем ответ.
      *
-     * @param $request
+     * @param  Request  $request
      *
-     * @return array
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    protected function prepare($request): array
+    public function toResponse($request)
     {
         $indexPage = $this->pagesService->getItemBySlug(
             'index',
@@ -65,13 +63,13 @@ final class GetItemResponse extends BaseResponse
         );
 
         if (! $indexPage) {
-            return [];
+            abort(404);
         }
 
         $mainPageItems = $this->mainPageService->getItems();
         $stages = $this->checksService->getContestStages();
 
-        return array_merge(
+        $data = array_merge(
             $mainPageItems,
             [
                 'SEO' => $indexPage['meta'],
@@ -79,5 +77,7 @@ final class GetItemResponse extends BaseResponse
                 'stages' => $stages,
             ]
         );
+
+        return view('packages.mainpage.app::front.pages.index', $data);
     }
 }

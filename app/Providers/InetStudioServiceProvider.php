@@ -257,7 +257,7 @@ class InetStudioServiceProvider extends ServiceProvider
                 if (strpos($namespace, 'admin.module') !== false) {
                     $fullExpression = $namespace.'::'.$expression;
 
-                    $result .= "<?php 
+                    $result .= "<?php
                         if (\$__env->exists('{$fullExpression}')) echo \$__env->make('{$fullExpression}', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render();
                      ?>\r\n";
                 }
@@ -669,7 +669,7 @@ class InetStudioServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                'InetStudio\SitemapPackage\Sitemap\Console\Commands\GenerateSitemap',
+                'InetStudio\SitemapPackage\Sitemap\Contracts\Console\Commands\GenerateSitemapCommandContract',
             ]);
         }
 

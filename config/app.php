@@ -166,14 +166,14 @@ return [
         /*
          * Package Service Providers...
          */
-        InetStudio\ACL\Activations\Providers\ActivationsBindingsServiceProvider::class,
-        InetStudio\ACL\Providers\ACLBindingsServiceProvider::class,
-        InetStudio\ACL\Passwords\Providers\PasswordsBindingsServiceProvider::class,
-        InetStudio\ACL\Permissions\Providers\PermissionsBindingsServiceProvider::class,
-        InetStudio\ACL\Profiles\Providers\ProfilesBindingsServiceProvider::class,
-        InetStudio\ACL\Roles\Providers\RolesBindingsServiceProvider::class,
-        InetStudio\ACL\Users\Providers\UsersBindingsServiceProvider::class,
-        InetStudio\ACL\Users\Providers\EventsServiceProvider::class,
+        InetStudio\ACL\Providers\BindingsServiceProvider::class,
+        InetStudio\ACL\Activations\Providers\BindingsServiceProvider::class,
+        InetStudio\ACL\Passwords\Providers\BindingsServiceProvider::class,
+        InetStudio\ACL\Permissions\Providers\BindingsServiceProvider::class,
+        InetStudio\ACL\Profiles\Providers\BindingsServiceProvider::class,
+        InetStudio\ACL\Roles\Providers\BindingsServiceProvider::class,
+        InetStudio\ACL\SocialProfiles\Providers\BindingsServiceProvider::class,
+        InetStudio\ACL\Users\Providers\BindingsServiceProvider::class,
         InetStudio\AdminPanel\Base\Providers\BindingsServiceProvider::class,
         InetStudio\AdminPanel\Providers\AdminPanelBindingsServiceProvider::class,
         InetStudio\CachePackage\Cache\Providers\BindingsServiceProvider::class,
@@ -192,6 +192,7 @@ return [
         Packages\PagesPackage\Pages\Providers\BindingsServiceProvider::class,
         InetStudio\SearchPackage\Search\Providers\BindingsServiceProvider::class,
         InetStudio\SimpleCounters\Counters\Providers\BindingsServiceProvider::class,
+        InetStudio\SitemapPackage\Sitemap\Providers\BindingsServiceProvider::class,
         InetStudio\Uploads\Providers\BindingsServiceProvider::class,
         InetStudio\Widgets\Providers\WidgetsBindingsServiceProvider::class,
 
@@ -205,6 +206,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        InetStudio\ACL\Users\Providers\EventsServiceProvider::class,
 
     ],
 
