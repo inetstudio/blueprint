@@ -14,10 +14,11 @@ set('repository', 'git@bitbucket.org:inet-studio/project.git');
 add('shared_files', []);
 add('shared_dirs', []);
 add('writable_dirs', [
+    'storage/app/public/checks_contest',
+    'storage/app/public/checks_contest/checks',
     'storage/app/public/pages',
     'storage/app/public/temp',
     'storage/app/public/users',
-    'storage/app/public/widgets',
     'storage/uploads',
     'vendor',
 ]);

@@ -19,6 +19,7 @@ class CreateChecksContestChecksTables extends Migration
             $table->string('verify_hash')->default('');
             $table->json('receipt_data')->nullable();
             $table->json('additional_info')->nullable();
+            $table->string('user_id')->default(0);
             $table->integer('status_id')->unsigned()->index()->default(0);
             $table->timestamps();
             $table->softDeletes();

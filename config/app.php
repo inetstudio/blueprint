@@ -177,6 +177,7 @@ return [
         InetStudio\AdminPanel\Base\Providers\BindingsServiceProvider::class,
         InetStudio\AdminPanel\Providers\AdminPanelBindingsServiceProvider::class,
         InetStudio\CachePackage\Cache\Providers\BindingsServiceProvider::class,
+        InetStudio\CaptchaPackage\Captcha\Providers\BindingsServiceProvider::class,
         Packages\ChecksContest\Checks\Providers\BindingsServiceProvider::class,
         InetStudio\ChecksContest\Prizes\Providers\BindingsServiceProvider::class,
         Packages\ChecksContest\Products\Providers\BindingsServiceProvider::class,
