@@ -26,6 +26,8 @@ final class BindingsServiceProvider extends PackageBindingsServiceProvider
         $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Exports\ItemsExportContract'] = 'Packages\ChecksContest\Checks\Exports\ItemsExport';
         $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Exports\ItemsFullExportContract'] = 'Packages\ChecksContest\Checks\Exports\ItemsFullExport';
         $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Http\Requests\Front\SaveItemRequestContract'] = 'Packages\ChecksContest\Checks\Http\Requests\Front\SaveItemRequest';
+        $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Listeners\Back\SetWinnerListenerContract'] = 'Packages\ChecksContest\Checks\Listeners\Back\SetWinnerListener';
+        $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Listeners\ItemStatusChangeListenerContract'] = 'Packages\ChecksContest\Checks\Listeners\ItemStatusChangeListener';
         $this->bindings['InetStudio\ChecksContest\Checks\Contracts\Services\Front\ItemsServiceContract'] = 'Packages\ChecksContest\Checks\Services\Front\ItemsService';
     }
 }
