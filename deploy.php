@@ -72,15 +72,12 @@ after('deploy:shared', 'files:prod_environment');
 
 after('deploy:shared', 'copy:assets');
 
-desc('Execute artisan route:cache-separate');
-task('artisan:route:cache-separate', function () {
-    run('{{bin/php}} {{release_path}}/artisan route:cache-separate');
-});
-after('artisan:config:cache', 'artisan:route:cache-separate');
+desc('Execute artisan route:cache');
+after('artisan:optimize', 'artisan:route:cache');
 
 desc('Restart PHP-FPM service');
 task('php-fpm:restart', function () {
-    run('sudo systemctl restart php7.3-fpm.service');
+    run('sudo systemctl restart php7.4-fpm.service');
 });
 after('deploy:symlink', 'php-fpm:restart');
 

@@ -15,7 +15,7 @@ final class ItemsService extends PackageItemsService
     /**
      * @var CacheServiceContract
      */
-    protected $cacheService;
+    protected CacheServiceContract $cacheService;
 
     /**
      * ItemsService constructor.
@@ -57,8 +57,7 @@ final class ItemsService extends PackageItemsService
         };
 
         $itemsKeys = Cache::remember($cacheKey, now()->addDays(1), $cacheCallback);
-        $item = $this->cacheService->getCachedItems($itemsKeys)->first();
 
-        return $item;
+        return $this->cacheService->getCachedItems($itemsKeys)->first();
     }
 }

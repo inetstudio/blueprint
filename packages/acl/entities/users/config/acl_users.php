@@ -30,25 +30,9 @@ return [
      */
 
     'relationships' => [
-        'comments' => [
-            'relationship' => 'hasMany',
-            'model' => 'InetStudio\CommentsPackage\Comments\Models\CommentModel',
-            'params' => [
-                'user_id',
-                'id'
-            ],
-        ],
         'feedback' => [
             'relationship' => 'hasMany',
             'model' => 'InetStudio\FeedbackPackage\Feedback\Models\FeedbackModel',
-            'params' => [
-                'user_id',
-                'id'
-            ],
-        ],
-        'subscription' => [
-            'relationship' => 'hasOne',
-            'model' => 'InetStudio\Subscription\Models\SubscriptionModel',
             'params' => [
                 'user_id',
                 'id'

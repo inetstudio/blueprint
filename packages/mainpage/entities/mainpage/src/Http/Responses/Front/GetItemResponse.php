@@ -2,24 +2,25 @@
 
 namespace Packages\MainPagePackage\MainPage\Http\Responses\Front;
 
-use InetStudio\AdminPanel\Base\Http\Responses\BaseResponse;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Responsable;
 use Packages\MainPagePackage\MainPage\Services\Front\MainPageService;
 use InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract as PagesServiceContract;
 
 /**
  * Class GetItemResponse.
  */
-final class GetItemResponse extends BaseResponse
+final class GetItemResponse implements Responsable
 {
     /**
      * @var MainPageService
      */
-    protected $mainPageService;
+    protected MainPageService $mainPageService;
 
     /**
      * @var PagesServiceContract
      */
-    protected $pagesService;
+    protected PagesServiceContract $pagesService;
 
     /**
      * GetItemResponse constructor.
@@ -33,41 +34,39 @@ final class GetItemResponse extends BaseResponse
     ) {
         $this->mainPageService = $mainPageService;
         $this->pagesService = $pagesService;
-
-        $this->abortOnEmptyData = true;
-        $this->view = 'packages.mainpage.app::front.pages.index';
     }
 
     /**
-     * Prepare response data.
+     * Возвращаем ответ.
      *
-     * @param $request
+     * @param  Request  $request
      *
-     * @return array
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    protected function prepare($request): array
+    public function toResponse($request)
     {
         $indexPage = $this->pagesService->getItemBySlug(
             'index',
             [
                 'columns' => ['content'],
-                'relations' => ['meta', 'media', 'custom_fields'],
-                'includes' => ['branding'],
+                'relations' => ['meta', 'media'],
             ]
         );
 
         if (! $indexPage) {
-            return [];
+            abort(404);
         }
 
         $mainPageItems = $this->mainPageService->getItems();
 
-        return array_merge(
+        $data = array_merge(
             $mainPageItems,
             [
                 'SEO' => $indexPage['meta'],
                 'item' => $indexPage,
             ]
         );
+
+        return view('packages.mainpage.app::front.pages.index', $data);
     }
 }

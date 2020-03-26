@@ -15,7 +15,7 @@ final class MetaTransformer extends BaseTransformer
      *
      * @var array
      */
-    public $services = [];
+    public array $services = [];
 
     /**
      * MetaTransformer constructor.
