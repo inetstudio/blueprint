@@ -195,7 +195,7 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/admin-panel/entities/base/routes/web.php');
 
         if (! $this->configIsCached) {
-            foreach (['audit', 'medialibrary', 'sentry', 'ziggy'] as $config) {
+            foreach (['audit', 'media-library', 'sentry', 'ziggy'] as $config) {
                 $this->app['config']->set($config, array_merge(
                     $this->app['config']->get($config, []), require __DIR__.'/../../packages/admin-panel/entities/base/config/'.$config.'.php'
                 ));
@@ -326,7 +326,7 @@ class InetStudioServiceProvider extends ServiceProvider
             $partials = explode("@", $value);
             $service = array_pop($partials);
 
-            $name = implode($partials, '@');
+            $name = implode('@', $partials);
             $nameLen = strlen($name);
 
             $startHidePos = floor($nameLen*0.33);

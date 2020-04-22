@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         'InetStudio\PagesPackage\Pages\Contracts\Events\Back\ModifyItemEventContract' => [
             'Packages\PagesPackage\Pages\Listeners\Front\ClearItemCache',
         ],
+        'InetStudio\FeedbackPackage\Feedback\Contracts\Events\Front\SendItemEventContract' => [
+            'InetStudio\FeedbackPackage\Feedback\Contracts\Listeners\SendEmailToAdminListenerContract',
+        ],
     ];
 
     /**
