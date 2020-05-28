@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 let packagesPath = './vendor/inetstudio',
     search = true;
 
@@ -33,6 +35,8 @@ if (search) {
         console.log("Cannot write file ", e);
     }
 }
+
+mix.setResourceRoot(process.env.APP_URL);
 
 mix.autoload({
     jquery: ['$', 'jQuery']

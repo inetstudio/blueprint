@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Responsable;
 use Packages\MainPagePackage\MainPage\Services\Front\MainPageService;
 use InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract as PagesServiceContract;
+use InetStudio\ChecksContest\Checks\Contracts\Services\Front\ItemsServiceContract as ChecksServiceContract;
 
 /**
  * Class GetItemResponse.
@@ -23,17 +24,25 @@ final class GetItemResponse implements Responsable
     protected PagesServiceContract $pagesService;
 
     /**
+     * @var ChecksServiceContract
+     */
+    protected $checksService;
+
+    /**
      * GetItemResponse constructor.
      *
      * @param  MainPageService  $mainPageService
      * @param  PagesServiceContract  $pagesService
+     * @param  ChecksServiceContract  $checksService
      */
     public function __construct(
         MainPageService $mainPageService,
-        PagesServiceContract $pagesService
+        PagesServiceContract $pagesService,
+        ChecksServiceContract $checksService
     ) {
         $this->mainPageService = $mainPageService;
         $this->pagesService = $pagesService;
+        $this->checksService = $checksService;
     }
 
     /**
@@ -58,12 +67,14 @@ final class GetItemResponse implements Responsable
         }
 
         $mainPageItems = $this->mainPageService->getItems();
+        $stages = $this->checksService->getContestStages();
 
         $data = array_merge(
             $mainPageItems,
             [
                 'SEO' => $indexPage['meta'],
                 'item' => $indexPage,
+                'stages' => $stages,
             ]
         );
 
