@@ -440,7 +440,6 @@ class InetStudioServiceProvider extends ServiceProvider
                     'InetStudio\ChecksContest\Checks\Console\Commands\CreateFoldersCommand',
                     'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\ModerateChecksCommandContract',
                     'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\RecognizeCodesCommandContract',
-                    'InetStudio\ChecksContest\Checks\Console\Commands\RemoveDuplicatesCommand',
                     'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\SetWinnerCommandContract',
                 ]
             );

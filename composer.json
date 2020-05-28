@@ -78,11 +78,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Packages\\ACL\\Activations\\": "packages/acl/entities/activations/src",
-            "Packages\\ACL\\Passwords\\": "packages/acl/entities/passwords/src",
-            "Packages\\ACL\\Profiles\\": "packages/acl/entities/profiles/src",
-            "Packages\\ACL\\Roles\\": "packages/acl/entities/roles/src",
-            "Packages\\ACL\\Users\\": "packages/acl/entities/users/src",
+            "Packages\\ChecksContest\\Checks\\": "packages/checks-contest/entities/checks/src",
+            "Packages\\ChecksContest\\Products\\": "packages/checks-contest/entities/products/src",
             "Packages\\FeedbackPackage\\Feedback\\": "packages/feedback/entities/feedback/src",
             "Packages\\MainPagePackage\\MainPage\\": "packages/mainpage/entities/mainpage/src",
             "Packages\\MetaPackage\\Meta\\": "packages/meta/entities/meta/src",
