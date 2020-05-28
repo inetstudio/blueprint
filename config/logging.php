@@ -37,7 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily', 'sentry'],
+            'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
 
@@ -96,10 +96,9 @@ return [
             'handler' => NullHandler::class,
         ],
 
-        'sentry' => [
-            'driver' => 'sentry',
+        'emergency' => [
+            'path' => storage_path('logs/laravel.log'),
         ],
-
     ],
 
 ];

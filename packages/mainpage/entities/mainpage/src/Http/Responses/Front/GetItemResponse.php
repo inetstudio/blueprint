@@ -16,12 +16,12 @@ final class GetItemResponse implements Responsable
     /**
      * @var MainPageService
      */
-    protected $mainPageService;
+    protected MainPageService $mainPageService;
 
     /**
      * @var PagesServiceContract
      */
-    protected $pagesService;
+    protected PagesServiceContract $pagesService;
 
     /**
      * @var ChecksServiceContract

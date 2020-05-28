@@ -25,7 +25,7 @@ class InetStudioServiceProvider extends ServiceProvider
     /**
      * @var bool
      */
-    protected $configIsCached = false;
+    protected bool $configIsCached = false;
 
     /**
      * Service Provider Boot.
@@ -57,7 +57,6 @@ class InetStudioServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        \Ekko::enableGlobalHelpers();
     }
 
     /**
@@ -222,7 +221,7 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/admin-panel/entities/base/routes/web.php');
 
         if (! $this->configIsCached) {
-            foreach (['audit', 'medialibrary', 'sentry', 'ziggy'] as $config) {
+            foreach (['audit', 'media-library', 'sentry', 'ziggy'] as $config) {
                 $this->app['config']->set($config, array_merge(
                     $this->app['config']->get($config, []), require __DIR__.'/../../packages/admin-panel/entities/base/config/'.$config.'.php'
                 ));
@@ -353,7 +352,7 @@ class InetStudioServiceProvider extends ServiceProvider
             $partials = explode("@", $value);
             $service = array_pop($partials);
 
-            $name = implode($partials, '@');
+            $name = implode('@', $partials);
             $nameLen = strlen($name);
 
             $startHidePos = floor($nameLen*0.33);
@@ -707,18 +706,13 @@ class InetStudioServiceProvider extends ServiceProvider
      */
     protected function bootWidgetsPackage(): void
     {
-        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/widgets/routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/widgets/entities/widgets/routes/web.php');
 
-        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/widgets/resources/views', 'admin.module.widgets');
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/widgets/entities/widgets/resources/views', 'admin.module.widgets');
 
         if (! $this->configIsCached) {
             $this->mergeConfigFrom(
-                __DIR__.'/../../vendor/inetstudio/widgets/config/widgets.php',
-                'widgets'
-            );
-
-            $this->mergeConfigFrom(
-                __DIR__.'/../../vendor/inetstudio/widgets/config/filesystems.php', 'filesystems.disks'
+                __DIR__.'/../../vendor/inetstudio/widgets/entities/widgets/config/filesystems.php', 'filesystems.disks'
             );
         }
 
@@ -729,19 +723,9 @@ class InetStudioServiceProvider extends ServiceProvider
         );
 
         Blade::directive('widget', function ($expression) {
-            $widgetsService = app()->make('InetStudio\Widgets\Contracts\Services\Back\WidgetsServiceContract');
+            $widgetsService = app()->make('InetStudio\WidgetsPackage\Widgets\Contracts\Services\Front\ItemsServiceContract');
 
-            $widget = $widgetsService->getWidgetObject($expression);
-
-            if ($widget->id) {
-                $view = $widget->view;
-
-                if (view()->exists($view)) {
-                    return view($view, $widget->params);
-                }
-            }
-
-            return '';
+            return $widgetsService->getItemContent($expression);
         });
     }
 }

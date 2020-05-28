@@ -15,7 +15,7 @@ final class SitemapService extends PackageSitemapService
     /**
      * @var CacheServiceContract
      */
-    protected $cacheService;
+    protected CacheServiceContract $cacheService;
 
     /**
      * SitemapService constructor.

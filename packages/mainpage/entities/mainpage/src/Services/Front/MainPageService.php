@@ -12,7 +12,7 @@ final class MainPageService
     /**
      * @var CacheServiceContract
      */
-    protected $cacheService;
+    protected CacheServiceContract $cacheService;
 
     /**
      * MainPageService constructor.

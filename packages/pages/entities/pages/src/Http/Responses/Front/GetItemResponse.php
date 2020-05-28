@@ -14,12 +14,12 @@ final class GetItemResponse implements Responsable
     /**
      * @var PagesServiceContract
      */
-    protected $pagesService;
+    protected PagesServiceContract $pagesService;
 
     /**
      * @var array
      */
-    protected $queryParams = [
+    protected array $queryParams = [
         'columns' => ['content'],
         'relations' => ['meta', 'media'],
     ];

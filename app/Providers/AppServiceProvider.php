@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
                 'checks_contest_statuses' => 'InetStudio\ChecksContest\Statuses\Models\StatusModel',
                 'meta' => 'InetStudio\MetaPackage\Meta\Models\MetaModel',
                 'pages' => 'InetStudio\PagesPackage\Pages\Models\PageModel',
-                'widgets' => 'InetStudio\Widgets\Models\WidgetModel',
+                'widgets' => 'InetStudio\WidgetsPackage\Widgets\Models\WidgetModel',
             ]
         );
     }

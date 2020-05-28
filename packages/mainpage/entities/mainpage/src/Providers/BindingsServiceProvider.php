@@ -10,7 +10,7 @@ use Illuminate\Contracts\Support\DeferrableProvider;
  */
 final class BindingsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    public $bindings = [
+    public array $bindings = [
         'MainPageService' => 'Packages\MainPagePackage\MainPage\Services\Front\MainPageService',
     ];
 
