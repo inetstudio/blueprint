@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
             [
                 'meta' => 'InetStudio\MetaPackage\Meta\Models\MetaModel',
                 'pages' => 'Packages\PagesPackage\Pages\Models\PageModel',
-                'widgets' => 'InetStudio\Widgets\Models\WidgetModel',
+                'widgets' => 'InetStudio\WidgetsPackage\Widgets\Models\WidgetModel',
             ]
         );
     }

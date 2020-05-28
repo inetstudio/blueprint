@@ -186,7 +186,7 @@ return [
         InetStudio\SimpleCounters\Counters\Providers\BindingsServiceProvider::class,
         InetStudio\SitemapPackage\Sitemap\Providers\BindingsServiceProvider::class,
         InetStudio\Uploads\Providers\BindingsServiceProvider::class,
-        InetStudio\Widgets\Providers\WidgetsBindingsServiceProvider::class,
+        InetStudio\WidgetsPackage\Widgets\Providers\BindingsServiceProvider::class,
 
         App\Providers\InetStudioServiceProvider::class,
 
