@@ -1,24 +1,16 @@
 <?php
 
-namespace Packages\ChecksContest\Products\Providers;
+namespace Packages\ReceiptsContest\Products\Providers;
 
 use Illuminate\Contracts\Foundation\Application;
-use InetStudio\ChecksContest\Products\Providers\BindingsServiceProvider as PackageBindingsServiceProvider;
+use InetStudio\ReceiptsContest\Products\Providers\BindingsServiceProvider as PackageBindingsServiceProvider;
 
-/**
- * Class BindingsServiceProvider.
- */
 final class BindingsServiceProvider extends PackageBindingsServiceProvider
 {
-    /**
-     * BindingsServiceProvider constructor.
-     *
-     * @param  Application  $app
-     */
     public function __construct(Application $app)
     {
         parent::__construct($app);
 
-        $this->bindings['InetStudio\ChecksContest\Products\Contracts\Transformers\Back\Resource\ShowTransformerContract'] = 'Packages\ChecksContest\Products\Transformers\Back\Resource\ShowTransformer';
+        //$this->bindings['InetStudio\ReceiptsContest\Products\Contracts\Transformers\Back\Resource\ShowTransformerContract'] = 'Packages\ReceiptsContest\Products\Transformers\Back\Resource\ShowTransformer';
     }
 }

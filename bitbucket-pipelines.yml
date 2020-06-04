@@ -1,5 +1,3 @@
-image: alpine
-
 pipelines:
   tags:
     rollback-prod-*:
@@ -27,61 +25,36 @@ pipelines:
           script:
             - dep rollback:full test
   branches:
-    production:
+    '{test,production}':
       - step:
-          name: Build assets
+          name: Install PHP packages
+          image: composer
           script:
-            - apk --no-cache add git yarn nodejs npm php7 php7-pdo php7-curl php7-tokenizer php7-fileinfo php7-ctype php7-bcmath php7-imagick php7-dom php7-simplexml php7-xmlreader php7-json php7-gd php7-exif php7-xmlwriter php7-xml php7-zip composer tzdata
-            - export VERSION=$(TZ=":Europe/Moscow" date +v%y.%-m.%-d%-H%M)
-            - printf $VERSION > public/release
-            - mv .env.production .env
-            - composer install --no-scripts
-            - yarn install
-            - npm run prod
+            - composer install --no-scripts --ignore-platform-reqs
           artifacts:
-            - public/admin/**
-            - public/release
-            - .env
-      - step:
-          name: Deploy to production server
-          image: pipelinecomponents/deployer
-          deployment: production
-          script:
-            - dep deploy production
-      - step:
-          name: Sentry Release
-          image: getsentry/sentry-cli
-          script:
-            - apk --no-cache add git
-            - export VERSION=$(cat public/release)
-            - export SENTRY_VERSION=$VERSION-$VERSION_POSTFIX
-            - sentry-cli releases -o "${SENTRY_ORG}" new -p "${SENTRY_PROJECT_BACKEND}" -p "${SENTRY_PROJECT_FRONTEND}" "${SENTRY_VERSION}"
-            - sentry-cli releases -o "${SENTRY_ORG}" set-commits "${SENTRY_VERSION}" --auto
-            - sentry-cli releases -o "${SENTRY_ORG}" finalize "${SENTRY_VERSION}"
-            - sentry-cli releases -o "${SENTRY_ORG}" deploys "${SENTRY_VERSION}" new -e "production"
-            - git tag -a ${VERSION} -m "Build ${BITBUCKET_BUILD_NUMBER}"
-            - git push origin --tags
-    test:
+            - vendor/**
       - step:
           name: Build admin assets
+          image: node
           script:
-            - apk --no-cache add git yarn nodejs npm php7 php7-pdo php7-curl php7-tokenizer php7-fileinfo php7-ctype php7-bcmath php7-imagick php7-dom php7-simplexml php7-xmlreader php7-json php7-gd php7-exif php7-xmlwriter php7-xml php7-zip composer tzdata
-            - export VERSION=$(TZ=":Europe/Moscow" date +v%y.%-m.%-d%-H%M)
-            - printf $VERSION > public/release
-            - mv .env.test .env
-            - composer install --no-scripts
+            - apt-get update && apt-get install -y git
             - yarn install
-            - npm run dev
+            - mv .env.$BITBUCKET_BRANCH .env
+            - npm run $BITBUCKET_BRANCH
           artifacts:
-            - public/admin/**
-            - public/release
             - .env
+            - public/admin/**
       - step:
-          name: Deploy to test server
+          name: Deploy to server
           image: pipelinecomponents/deployer
           deployment: test
           script:
-            - dep deploy test
+            - apk --no-cache add tzdata
+            - export VERSION=$(TZ=":Europe/Moscow" date +v%y.%-m.%-d%-H%M)
+            - printf $VERSION > public/release
+            - dep deploy $BITBUCKET_BRANCH
+          artifacts:
+            - public/release
       - step:
           name: Sentry Release
           image: getsentry/sentry-cli
@@ -89,9 +62,9 @@ pipelines:
             - apk --no-cache add git
             - export VERSION=$(cat public/release)
             - export SENTRY_VERSION=$VERSION-$VERSION_POSTFIX
-            - sentry-cli releases -o "${SENTRY_ORG}" new -p "${SENTRY_PROJECT_BACKEND}" -p "${SENTRY_PROJECT_FRONTEND}" "${SENTRY_VERSION}"
+            - sentry-cli releases -o "${SENTRY_ORG}" new -p "${SENTRY_PROJECT_BACKEND}" "${SENTRY_VERSION}"
             - sentry-cli releases -o "${SENTRY_ORG}" set-commits "${SENTRY_VERSION}" --auto
             - sentry-cli releases -o "${SENTRY_ORG}" finalize "${SENTRY_VERSION}"
-            - sentry-cli releases -o "${SENTRY_ORG}" deploys "${SENTRY_VERSION}" new -e "test"
+            - sentry-cli releases -o "${SENTRY_ORG}" deploys "${SENTRY_VERSION}" new -e "${BITBUCKET_BRANCH}"
             - git tag -a ${VERSION} -m "Build ${BITBUCKET_BUILD_NUMBER}"
             - git push origin --tags

@@ -17,21 +17,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Elasticsearch\ClientBuilder as ElasticBuilder;
 
-/**
- * Class InetStudioServiceProvider.
- */
 class InetStudioServiceProvider extends ServiceProvider
 {
-    /**
-     * @var bool
-     */
     protected bool $configIsCached = false;
 
-    /**
-     * Service Provider Boot.
-     *
-     * @param  Router  $router
-     */
     public function boot(Router $router): void
     {
         $this->configIsCached = $this->app->configurationIsCached();
@@ -41,13 +30,13 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->bootAdminPanelPackage();
         $this->bootCachePackage();
         $this->bootCaptchaPackage();
-        $this->bootChecksContestPackage();
         $this->bootClassifiersPackage();
         $this->bootFeedbackPackage();
         $this->bootFnsPackage();
         $this->bootMainpagePackage();
         $this->bootMetaPackage();
         $this->bootPagesPackage();
+        $this->bootReceiptsContestPackage();
         $this->bootSearchPackage();
         $this->bootSimpleCountersPackage();
         $this->bootSitemapPackage();
@@ -425,41 +414,41 @@ class InetStudioServiceProvider extends ServiceProvider
     }
 
     /**
-     * ChecksContest Package Boot.
+     * ReceiptsContest Package Boot.
      */
-    protected function bootChecksContestPackage(): void
+    protected function bootReceiptsContestPackage(): void
     {
-        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/package/resources/views', 'admin.module.checks-contest');
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/package/resources/views', 'admin.module.receipts-contest');
 
         // Checks
         if ($this->app->runningInConsole()) {
             $this->commands(
                 [
-                    'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\AttachFnsReceiptsCommandContract',
-                    'InetStudio\ChecksContest\Checks\Console\Commands\AttachProductsCommand',
-                    'InetStudio\ChecksContest\Checks\Console\Commands\CreateFoldersCommand',
-                    'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\ModerateChecksCommandContract',
-                    'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\RecognizeCodesCommandContract',
-                    'InetStudio\ChecksContest\Checks\Contracts\Console\Commands\SetWinnerCommandContract',
+                    'InetStudio\ReceiptsContest\Receipts\Contracts\Console\Commands\AttachFnsReceiptsCommandContract',
+                    'InetStudio\ReceiptsContest\Receipts\Console\Commands\AttachProductsCommand',
+                    'InetStudio\ReceiptsContest\Receipts\Console\Commands\CreateFoldersCommand',
+                    'InetStudio\ReceiptsContest\Receipts\Contracts\Console\Commands\ModerateCommandContract',
+                    'InetStudio\ReceiptsContest\Receipts\Contracts\Console\Commands\RecognizeCodesCommandContract',
+                    'InetStudio\ReceiptsContest\Receipts\Contracts\Console\Commands\SetWinnerCommandContract',
                 ]
             );
         }
 
-        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/checks/routes/web.php');
-        $this->loadRoutesFrom(__DIR__.'/../../packages/checks-contest/entities/checks/routes/api.php');
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../../packages/checks-contest/entities/receipts/routes/api.php');
 
-        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/checks/resources/views', 'admin.module.checks-contest.checks');
-        $this->loadViewsFrom(__DIR__.'/../../packages/checks-contest/entities/checks/resources/views', 'packages.checks-contest.checks.app');
-        view()->getFinder()->prependNamespace('admin.module.checks-contest.checks', __DIR__.'/../../packages/checks-contest/entities/checks/resources/views');
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/resources/views', 'admin.module.receipts-contest.receipts');
+        $this->loadViewsFrom(__DIR__.'/../../packages/checks-contest/entities/receipts/resources/views', 'packages.receipts-contest.receipts.app');
+        view()->getFinder()->prependNamespace('admin.module.receipts-contest.receipts', __DIR__.'/../../packages/checks-contest/entities/receipts/resources/views');
 
         if (! $this->configIsCached) {
             $this->mergeConfigFrom(
-                __DIR__.'/../../vendor/inetstudio/checks-contest/entities/checks/config/filesystems.php',
+                __DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/config/filesystems.php',
                 'filesystems.disks'
             );
 
             $this->mergeConfigFrom(
-                __DIR__.'/../../packages/checks-contest/entities/checks/config/checks_contest_checks.php',
+                __DIR__.'/../../packages/checks-contest/entities/receipts/config/receipts_contest_receipts.php',
                 'checks_contest_checks'
             );
         }
@@ -467,7 +456,7 @@ class InetStudioServiceProvider extends ServiceProvider
         // Prizes
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/prizes/routes/web.php');
 
-        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/prizes/resources/views', 'admin.module.checks-contest.prizes');
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/prizes/resources/views', 'admin.module.receipts-contest.prizes');
 
         // Products
 
@@ -475,15 +464,15 @@ class InetStudioServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands(
                 [
-                    'InetStudio\ChecksContest\Statuses\Console\Commands\SetupCommand',
-                    'InetStudio\ChecksContest\Statuses\Console\Commands\StatusesSeedCommand',
+                    'InetStudio\ReceiptsContest\Statuses\Console\Commands\SetupCommand',
+                    'InetStudio\ReceiptsContest\Statuses\Console\Commands\StatusesSeedCommand',
                 ]
             );
         }
 
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/statuses/routes/web.php');
 
-        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/statuses/resources/views', 'admin.module.checks-contest.statuses');
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/statuses/resources/views', 'admin.module.receipts-contest.statuses');
     }
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Responsable;
 use Packages\MainPagePackage\MainPage\Services\Front\MainPageService;
 use InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract as PagesServiceContract;
-use InetStudio\ChecksContest\Checks\Contracts\Services\Front\ItemsServiceContract as ChecksServiceContract;
+use InetStudio\ReceiptsContest\Receipts\Contracts\Services\Front\ItemsServiceContract as ReceiptsServiceContract;
 
 /**
  * Class GetItemResponse.
@@ -24,7 +24,7 @@ final class GetItemResponse implements Responsable
     protected PagesServiceContract $pagesService;
 
     /**
-     * @var ChecksServiceContract
+     * @var ReceiptsServiceContract
      */
     protected $checksService;
 
@@ -33,12 +33,12 @@ final class GetItemResponse implements Responsable
      *
      * @param  MainPageService  $mainPageService
      * @param  PagesServiceContract  $pagesService
-     * @param  ChecksServiceContract  $checksService
+     * @param  ReceiptsServiceContract  $checksService
      */
     public function __construct(
         MainPageService $mainPageService,
         PagesServiceContract $pagesService,
-        ChecksServiceContract $checksService
+        ReceiptsServiceContract $checksService
     ) {
         $this->mainPageService = $mainPageService;
         $this->pagesService = $pagesService;

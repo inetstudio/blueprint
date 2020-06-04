@@ -20,6 +20,7 @@ class CreateChecksContestStatusesTables extends Migration
             $table->text('description')->nullable();
             $table->string('color_class')->default('default');
             $table->boolean('fill_reason')->default(false);
+            $table->boolean('draw')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
