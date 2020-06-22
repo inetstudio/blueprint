@@ -2,56 +2,29 @@
 
 namespace Packages\MainPagePackage\MainPage\Http\Responses\Front;
 
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Responsable;
 use Packages\MainPagePackage\MainPage\Services\Front\MainPageService;
 use InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract as PagesServiceContract;
 use InetStudio\ReceiptsContest\Receipts\Contracts\Services\Front\ItemsServiceContract as ReceiptsServiceContract;
 
-/**
- * Class GetItemResponse.
- */
 final class GetItemResponse implements Responsable
 {
-    /**
-     * @var MainPageService
-     */
     protected MainPageService $mainPageService;
 
-    /**
-     * @var PagesServiceContract
-     */
     protected PagesServiceContract $pagesService;
 
-    /**
-     * @var ReceiptsServiceContract
-     */
-    protected $checksService;
+    protected ReceiptsServiceContract $receiptsService;
 
-    /**
-     * GetItemResponse constructor.
-     *
-     * @param  MainPageService  $mainPageService
-     * @param  PagesServiceContract  $pagesService
-     * @param  ReceiptsServiceContract  $checksService
-     */
     public function __construct(
         MainPageService $mainPageService,
         PagesServiceContract $pagesService,
-        ReceiptsServiceContract $checksService
+        ReceiptsServiceContract $receiptsService
     ) {
         $this->mainPageService = $mainPageService;
         $this->pagesService = $pagesService;
-        $this->checksService = $checksService;
+        $this->receiptsService = $receiptsService;
     }
 
-    /**
-     * Возвращаем ответ.
-     *
-     * @param  Request  $request
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
-     */
     public function toResponse($request)
     {
         $indexPage = $this->pagesService->getItemBySlug(
@@ -67,7 +40,7 @@ final class GetItemResponse implements Responsable
         }
 
         $mainPageItems = $this->mainPageService->getItems();
-        $stages = $this->checksService->getContestStages();
+        $stages = $this->receiptsService->getContestStages();
 
         $data = array_merge(
             $mainPageItems,

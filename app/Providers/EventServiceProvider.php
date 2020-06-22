@@ -2,9 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -20,9 +17,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         'InetStudio\PagesPackage\Pages\Contracts\Events\Back\ModifyItemEventContract' => [
             'Packages\PagesPackage\Pages\Listeners\Front\ClearItemCache',
-        ],
-        'InetStudio\FeedbackPackage\Feedback\Contracts\Events\Front\SendItemEventContract' => [
-            'InetStudio\FeedbackPackage\Feedback\Contracts\Listeners\SendEmailToAdminListenerContract',
         ],
     ];
 

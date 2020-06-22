@@ -23,7 +23,7 @@
                 </ul>
             </li>
 
-            @include('admin.module.checks-contest::back.includes.navigation')
+            @include('admin.module.receipts-contest::back.includes.navigation')
 
             @include('admin.module.acl::back.includes.navigation')
         </ul>

@@ -7,33 +7,18 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
     protected $commands = [
         //
     ];
 
-    /**
-     * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('inetstudio:checks-contest:checks:winners')->dailyAt('00:30');
-        $schedule->command('inetstudio:checks-contest:checks:recognize-codes')->everyMinute();
-        $schedule->command('inetstudio:checks-contest:checks:fns')->hourly();
-        $schedule->command('inetstudio:checks-contest:checks:moderate')->everyMinute();
+        $schedule->command('inetstudio:receipts-contest:receipts:winners')->dailyAt('00:30');
+        $schedule->command('inetstudio:receipts-contest:receipts:recognize-codes')->everyMinute();
+        $schedule->command('inetstudio:receipts-contest:receipts:fns')->hourly();
+        $schedule->command('inetstudio:receipts-contest:receipts:moderate')->everyMinute();
     }
 
-    /**
-     * Register the commands for the application.
-     *
-     * @return void
-     */
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');

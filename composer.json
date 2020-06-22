@@ -78,8 +78,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Packages\\ReceiptsContest\\Receipts\\": "packages/checks-contest/entities/receipts/src",
-            "Packages\\ReceiptsContest\\Products\\": "packages/checks-contest/entities/products/src",
+            "Packages\\ReceiptsContest\\Receipts\\": "packages/receipts-contest/entities/receipts/src",
+            "Packages\\ReceiptsContest\\Products\\": "packages/receipts-contest/entities/products/src",
             "Packages\\FeedbackPackage\\Feedback\\": "packages/feedback/entities/feedback/src",
             "Packages\\MainPagePackage\\MainPage\\": "packages/mainpage/entities/mainpage/src",
             "Packages\\MetaPackage\\Meta\\": "packages/meta/entities/meta/src",

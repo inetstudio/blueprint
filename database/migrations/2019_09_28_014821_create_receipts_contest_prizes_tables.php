@@ -4,17 +4,17 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateChecksContestPrizesTables.
+ * Class CreateReceiptsContestPrizesTables.
  */
-class CreateChecksContestPrizesTables extends Migration
+class CreateReceiptsContestPrizesTables extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('checks_contest_prizes', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('receipts_contest_prizes', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->string('alias');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateChecksContestPrizesTables extends Migration
      */
     public function down()
     {
-        Schema::drop('checks_contest_prizes');
+        Schema::drop('receipts_contest_prizes');
     }
 }

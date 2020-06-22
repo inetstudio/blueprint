@@ -4,23 +4,21 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateChecksContestStatusesTables.
+ * Class CreateReceiptsContestStatusesTables.
  */
-class CreateChecksContestStatusesTables extends Migration
+class CreateReceiptsContestStatusesTables extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('checks_contest_statuses', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('receipts_contest_statuses', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->string('alias');
             $table->text('description')->nullable();
             $table->string('color_class')->default('default');
-            $table->boolean('fill_reason')->default(false);
-            $table->boolean('draw')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +29,6 @@ class CreateChecksContestStatusesTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('checks_contest_statuses');
+        Schema::dropIfExists('receipts_contest_statuses');
     }
 }

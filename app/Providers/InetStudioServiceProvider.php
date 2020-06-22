@@ -435,11 +435,11 @@ class InetStudioServiceProvider extends ServiceProvider
         }
 
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/routes/web.php');
-        $this->loadRoutesFrom(__DIR__.'/../../packages/checks-contest/entities/receipts/routes/api.php');
+        $this->loadRoutesFrom(__DIR__.'/../../packages/receipts-contest/entities/receipts/routes/api.php');
 
         $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/resources/views', 'admin.module.receipts-contest.receipts');
-        $this->loadViewsFrom(__DIR__.'/../../packages/checks-contest/entities/receipts/resources/views', 'packages.receipts-contest.receipts.app');
-        view()->getFinder()->prependNamespace('admin.module.receipts-contest.receipts', __DIR__.'/../../packages/checks-contest/entities/receipts/resources/views');
+        $this->loadViewsFrom(__DIR__.'/../../packages/receipts-contest/entities/receipts/resources/views', 'packages.receipts-contest.receipts.app');
+        view()->getFinder()->prependNamespace('admin.module.receipts-contest.receipts', __DIR__.'/../../packages/receipts-contest/entities/receipts/resources/views');
 
         if (! $this->configIsCached) {
             $this->mergeConfigFrom(
@@ -448,7 +448,7 @@ class InetStudioServiceProvider extends ServiceProvider
             );
 
             $this->mergeConfigFrom(
-                __DIR__.'/../../packages/checks-contest/entities/receipts/config/receipts_contest_receipts.php',
+                __DIR__.'/../../packages/receipts-contest/entities/receipts/config/receipts_contest_receipts.php',
                 'checks_contest_checks'
             );
         }

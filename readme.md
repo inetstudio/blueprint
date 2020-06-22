@@ -7,7 +7,7 @@
 - modify Homestead.yaml
 - vagrant up
 - vagrant ssh
-- mv .env.local .env
+- cp .env.local .env
 - php artisan key:generate
 - php artisan storage:link
 - yarn install
@@ -17,7 +17,7 @@
 - php artisan migrate
 - php artisan inetstudio:acl:roles:seed
 - php artisan inetstudio:acl:users:admin (admin / password)
-- php artisan inetstudio:checks-contest:statuses:seed
+- php artisan inetstudio:receipts-contest:statuses:seed
 
 <p><strong>Build admin panel front</strong></p>
 

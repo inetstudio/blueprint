@@ -4,17 +4,17 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateChecksContestChecksTables.
+ * Class CreateReceiptsContestReceiptsTables.
  */
-class CreateChecksContestChecksTables extends Migration
+class CreateReceiptsContestReceiptsTables extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('checks_contest_checks', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('receipts_contest_receipts', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('fns_receipt_id')->index()->default(0);
             $table->string('verify_hash')->default('');
             $table->json('receipt_data')->nullable();
@@ -25,8 +25,8 @@ class CreateChecksContestChecksTables extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('checks_contest_checks_prizes', function (Blueprint $table) {
-            $table->integer('check_id')->unsigned()->index();
+        Schema::create('receipts_contest_receipts_prizes', function (Blueprint $table) {
+            $table->integer('receipt_id')->unsigned()->index();
             $table->integer('prize_id')->unsigned()->index();
             $table->smallInteger('confirmed')->unsigned()->default(0);
             $table->timestamp('date_start')->nullable();
@@ -40,7 +40,7 @@ class CreateChecksContestChecksTables extends Migration
      */
     public function down()
     {
-        Schema::drop('checks_contest_checks_prizes');
-        Schema::drop('checks_contest_checks');
+        Schema::drop('receipts_contest_receipts_prizes');
+        Schema::drop('receipts_contest_receipts');
     }
 }

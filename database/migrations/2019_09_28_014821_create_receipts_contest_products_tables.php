@@ -4,16 +4,16 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateChecksContestProductsTables.
+ * Class CreateReceiptsContestProductsTables.
  */
-class CreateChecksContestProductsTables extends Migration
+class CreateReceiptsContestProductsTables extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('checks_contest_products', function (Blueprint $table) {
+        Schema::create('receipts_contest_products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('fns_receipt_id')->default(0);
             $table->unsignedBigInteger('receipt_id');
@@ -31,6 +31,6 @@ class CreateChecksContestProductsTables extends Migration
      */
     public function down()
     {
-        Schema::drop('checks_contest_products');
+        Schema::drop('receipts_contest_products');
     }
 }
