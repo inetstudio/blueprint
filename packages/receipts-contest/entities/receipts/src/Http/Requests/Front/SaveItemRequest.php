@@ -2,28 +2,15 @@
 
 namespace Packages\ReceiptsContest\Receipts\Http\Requests\Front;
 
-use InetStudio\ReceiptsContest\Receipts\Http\Requests\Front\SaveItemRequest as PackageSaveItemRequest;
+use InetStudio\ReceiptsContest\Receipts\Http\Requests\Front\SendRequest as PackageSaveItemRequest;
 
-/**
- * Class SaveItemRequest.
- */
 final class SaveItemRequest extends PackageSaveItemRequest
 {
-    /**
-     * Определить, авторизован ли пользователь для этого запроса.
-     *
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Сообщения об ошибках.
-     *
-     * @return array
-     */
     public function messages(): array
     {
         return [
@@ -37,11 +24,6 @@ final class SaveItemRequest extends PackageSaveItemRequest
         ];
     }
 
-    /**
-     * Правила проверки запроса.
-     *
-     * @return array
-     */
     public function rules(): array
     {
         return [

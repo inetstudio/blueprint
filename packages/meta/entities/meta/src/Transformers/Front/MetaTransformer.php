@@ -4,37 +4,20 @@ namespace Packages\MetaPackage\Meta\Transformers\Front;
 
 use Illuminate\Support\Arr;
 use InetStudio\AdminPanel\Base\Transformers\BaseTransformer;
+use InetStudio\MetaPackage\Meta\Contracts\Services\Front\ItemsServiceContract;
 
-/**
- * Class MetaTransformer.
- */
 final class MetaTransformer extends BaseTransformer
 {
-    /**
-     * Используемые сервисы.
-     *
-     * @var array
-     */
-    public array $services = [];
+    public ItemsServiceContract $metasService;
 
-    /**
-     * MetaTransformer constructor.
-     */
-    public function __construct()
+    public function __construct(ItemsServiceContract $metasService)
     {
-        $this->services['seo'] = app()->make('InetStudio\MetaPackage\Meta\Contracts\Services\Front\ItemsServiceContract');
+        $this->metasService = $metasService;
     }
 
-    /**
-     * Трансформация данных.
-     *
-     * @param $item
-     *
-     * @return array
-     */
     public function transform($item): array
     {
-        $metas = $this->services['seo']->getAllTags($item);
+        $metas = $this->metasService->getAllTags($item);
 
         $metaData = [];
         foreach ($metas as $key => $meta) {

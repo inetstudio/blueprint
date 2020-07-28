@@ -48,11 +48,6 @@ class InetStudioServiceProvider extends ServiceProvider
     {
     }
 
-    /**
-     * Acl Package Boot.
-     *
-     * @param  Router  $router
-     */
     protected function bootAclPackage(Router $router): void
     {
         // Activations
@@ -173,9 +168,6 @@ class InetStudioServiceProvider extends ServiceProvider
         $router->aliasMiddleware('ability', 'Laratrust\Middleware\LaratrustAbility');
     }
 
-    /**
-     * Addresses Package Boot.
-     */
     protected function bootAddressesPackage(): void
     {
         if ($this->app->runningInConsole()) {
@@ -195,9 +187,6 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Admin Panel Package Boot.
-     */
     protected function bootAdminPanelPackage(): void
     {
         // Base
@@ -384,9 +373,6 @@ class InetStudioServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Cache Package Boot.
-     */
     protected function bootCachePackage(): void
     {
         if (! $this->app->runningInConsole()) {
@@ -400,9 +386,6 @@ class InetStudioServiceProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Captcha Package Boot.
-     */
     protected function bootCaptchaPackage(): void
     {
         if (! $this->configIsCached) {
@@ -413,9 +396,6 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * ReceiptsContest Package Boot.
-     */
     protected function bootReceiptsContestPackage(): void
     {
         $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/package/resources/views', 'admin.module.receipts-contest');
@@ -425,7 +405,6 @@ class InetStudioServiceProvider extends ServiceProvider
             $this->commands(
                 [
                     'InetStudio\ReceiptsContest\Receipts\Contracts\Console\Commands\AttachFnsReceiptsCommandContract',
-                    'InetStudio\ReceiptsContest\Receipts\Console\Commands\AttachProductsCommand',
                     'InetStudio\ReceiptsContest\Receipts\Console\Commands\CreateFoldersCommand',
                     'InetStudio\ReceiptsContest\Receipts\Contracts\Console\Commands\ModerateCommandContract',
                     'InetStudio\ReceiptsContest\Receipts\Contracts\Console\Commands\RecognizeCodesCommandContract',
@@ -434,8 +413,8 @@ class InetStudioServiceProvider extends ServiceProvider
             );
         }
 
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/routes/api.php');
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/routes/web.php');
-        $this->loadRoutesFrom(__DIR__.'/../../packages/receipts-contest/entities/receipts/routes/api.php');
 
         $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/resources/views', 'admin.module.receipts-contest.receipts');
         $this->loadViewsFrom(__DIR__.'/../../packages/receipts-contest/entities/receipts/resources/views', 'packages.receipts-contest.receipts.app');
@@ -448,8 +427,12 @@ class InetStudioServiceProvider extends ServiceProvider
             );
 
             $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/config/services.php', 'services'
+            );
+
+            $this->mergeConfigFrom(
                 __DIR__.'/../../packages/receipts-contest/entities/receipts/config/receipts_contest_receipts.php',
-                'checks_contest_checks'
+                'receipts_contest_receipts'
             );
         }
 
@@ -475,9 +458,6 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/statuses/resources/views', 'admin.module.receipts-contest.statuses');
     }
 
-    /**
-     * Classifiers Package Boot.
-     */
     protected function bootClassifiersPackage(): void
     {
         $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/classifiers/package/resources/views', 'admin.module.classifiers');
@@ -507,9 +487,6 @@ class InetStudioServiceProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Feedback Package Boot.
-     */
     protected function bootFeedbackPackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/feedback/entities/feedback/routes/web.php');
@@ -531,9 +508,6 @@ class InetStudioServiceProvider extends ServiceProvider
         Event::listen('InetStudio\ACL\Users\Contracts\Events\Front\SocialRegisteredEventContract', 'InetStudio\FeedbackPackage\Feedback\Contracts\Listeners\Front\AttachUserToItemsListenerContract');
     }
 
-    /**
-     * Fns Package Boot.
-     */
     protected function bootFnsPackage(): void
     {
         // Accounts
@@ -556,9 +530,6 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Mainpage Package Boot.
-     */
     protected function bootMainpagePackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../packages/mainpage/entities/mainpage/routes/web.php');
@@ -566,9 +537,6 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../packages/mainpage/entities/mainpage/resources/views', 'packages.mainpage.app');
     }
 
-    /**
-     * Meta Package Boot.
-     */
     protected function bootMetaPackage(): void
     {
         $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/meta/entities/meta/resources/views', 'admin.module.meta');
@@ -593,9 +561,6 @@ class InetStudioServiceProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Pages Package Boot.
-     */
     protected function bootPagesPackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/pages/entities/pages/routes/web.php');
@@ -618,9 +583,6 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Search Package Boot.
-     */
     protected function bootSearchPackage(): void
     {
         app(EngineManager::class)->extend('elasticsearch', function () {
@@ -636,9 +598,6 @@ class InetStudioServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Simple Counters Package Boot.
-     */
     protected function bootSimpleCountersPackage(): void
     {
         if (! $this->configIsCached) {
@@ -649,9 +608,6 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Sitemap Package Boot.
-     */
     protected function bootSitemapPackage(): void
     {
         if ($this->app->runningInConsole()) {
@@ -668,9 +624,6 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Uploads Package Boot.
-     */
     protected function bootUploadsPackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/uploads/routes/web.php');
@@ -689,9 +642,6 @@ class InetStudioServiceProvider extends ServiceProvider
         FormBuilder::component('imagesStack', 'admin.module.uploads::back.forms.stacks.images', ['name', 'value', 'attributes']);
     }
 
-    /**
-     * Widgets Package Boot.
-     */
     protected function bootWidgetsPackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/widgets/entities/widgets/routes/web.php');

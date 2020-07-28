@@ -2,31 +2,18 @@
 
 namespace Packages\ReceiptsContest\Receipts\Console\Commands;
 
-use Carbon\Carbon;
 use SimpleXMLElement;
 use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\ReceiptsContest\Receipts\Console\Commands\SetWinnerCommand as PackageSetWinnerCommand;
 
-/**
- * Class SetWinnerCommand.
- */
 class SetWinnerCommand extends PackageSetWinnerCommand
 {
-    /**
-     * Инициализируем необходимые опции.
-     */
     protected function initOptions(): void
     {
         $this->drawOptions['euroValue'] = $this->getEuroValue();
     }
 
-    /**
-     * Возвращаем курс EUR к рублю.
-     *
-     * @return float
-     */
     protected function getEuroValue(): float
     {
         $client = new Client();
@@ -43,46 +30,42 @@ class SetWinnerCommand extends PackageSetWinnerCommand
         return (float) str_replace(',', '.', $eur);
     }
 
-    /**
-     * Получаем чеки победителей.
-     *
-     * @param  Collection  $checks
-     * @param  array  $prizeData
-     *
-     * @return Collection
-     */
-    protected function getWinnersReceipts(Collection $checks, array $prizeData): Collection
+    protected function getWinnersReceipts(Collection $receipts, array $prizeData): Collection
     {
         $indexes = [];
 
-        if ($checks->count() <= $prizeData['count']) {
-            $indexes = range(0, $checks->count() - 1);
+        if ($receipts->count() <= $prizeData['count']) {
+            $indexes = range(0, $receipts->count() - 1);
         } else {
-            if ($prizeData['prize'] == 'main') {
-                $indexes[] = (int) floor($checks->count() * ($this->drawOptions['euroValue'] - floor($this->drawOptions['euroValue']))) - 1;
-            } else {
+            if ($prizeData['prize'] == 'spa') {
                 for ($i = 1; $i <= $prizeData['count']; $i++) {
-                    $indexes[] = (int) ($i * floor($checks->count() / $prizeData['count'])) - 1;
+                    $indexes[] = (int) ($i * floor($receipts->count() / $prizeData['count'])) - 1;
                 }
+            } else {
+                $index = (int) floor($receipts->count() * ($this->drawOptions['euroValue'] - floor($this->drawOptions['euroValue']))) - 1;
+
+                $indexes[] = ($index < 0 ) ? 0 : $index;
             }
         }
 
         $winnersPhones = [];
+        $winnersEmails = [];
         $winnersReceipts = collect();
 
-        foreach ($checks as $index => $check) {
+        foreach ($receipts as $index => $receipt) {
             if (in_array($index, $indexes)) {
-                $data = $check->additional_info;
+                $data = $receipt->additional_info;
 
-                if (! (in_array($data['phone'], $winnersPhones))) {
+                if (! (in_array($data['phone'], $winnersPhones)) && ! (in_array($data['email'], $winnersEmails))) {
                     $winnersPhones[] = $data['phone'];
+                    $winnersEmails[] = $data['email'];
 
-                    $winnersReceipts->push($check);
-                } elseif ($index == ($checks->count() - 1)) {
+                    $winnersReceipts->push($receipt);
+                } elseif ($index == ($receipts->count() - 1)) {
                     $previousIndex = $this->getPreviousIndex($index, $indexes);
 
-                    if (isset($checks[$previousIndex])) {
-                        $winnersReceipts->push($checks[$previousIndex]);
+                    if (isset($receipts[$previousIndex])) {
+                        $winnersReceipts->push($receipts[$previousIndex]);
                     }
                 } else {
                     $indexes[] = $this->getNextIndex($index, $indexes);
@@ -91,40 +74,5 @@ class SetWinnerCommand extends PackageSetWinnerCommand
         }
 
         return $winnersReceipts;
-    }
-
-
-    /**
-     * Получаем индекс следующего чека.
-     *
-     * @param  int  $index
-     * @param  array  $indexes
-     *
-     * @return int
-     */
-    protected function getNextIndex(int $index, array $indexes): int
-    {
-        while (in_array($index, $indexes)) {
-            $index++;
-        }
-
-        return $index;
-    }
-
-    /**
-     * Получаем индекс предыдущего чека.
-     *
-     * @param  int  $index
-     * @param  array  $indexes
-     *
-     * @return int
-     */
-    protected function getPreviousIndex(int $index, array $indexes): int
-    {
-        while (in_array($index, $indexes)) {
-            $index--;
-        }
-
-        return $index;
     }
 }

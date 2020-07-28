@@ -9,7 +9,7 @@ return [
     'images' => [
         'quality' => 75,
         'conversions' => [
-            'check' => [
+            'receipt' => [
                 'images' => [
                     'default' => [
                         [
@@ -25,7 +25,17 @@ return [
         ],
     ],
 
-    'recognize_barcode_service' => env('RECEIPTS_RECOGNIZE_BARCODE_SERVICE'),
-    'fns_service' => env('RECEIPTS_FNS_SERVICE'),
-    'services_token' => env('RECEIPTS_SERVICES_TOKEN'),
+    'mails' => [
+        'win' => [
+            'bag' => [
+                'subject' => 'Поздравляем! Поздравляем! Вы выиграли ежедневный приз – сумку шоппер',
+            ],
+            'certificate' => [
+                'subject' => 'Поздравляем! Вы выиграли еженедельный приз – сертификат',
+            ],
+            'spa' => [
+                'subject' => 'Поздравляем! Вы выиграли главный приз – сертификат',
+            ],
+        ],
+    ],
 ];
