@@ -7,22 +7,10 @@ use InetStudio\PagesPackage\Pages\Contracts\Models\PageModelContract;
 use InetStudio\CachePackage\Cache\Contracts\Services\Front\CacheServiceContract;
 use InetStudio\PagesPackage\Pages\Services\Front\SitemapService as PackageSitemapService;
 
-/**
- * Class SitemapService.
- */
 final class SitemapService extends PackageSitemapService
 {
-    /**
-     * @var CacheServiceContract
-     */
     protected CacheServiceContract $cacheService;
 
-    /**
-     * SitemapService constructor.
-     *
-     * @param  CacheServiceContract  $cacheService
-     * @param  PageModelContract  $model
-     */
     public function __construct(CacheServiceContract $cacheService, PageModelContract $model)
     {
         parent::__construct($model);
@@ -30,13 +18,6 @@ final class SitemapService extends PackageSitemapService
         $this->cacheService = $cacheService;
     }
 
-    /**
-     * Получаем информацию по объектам для карты сайта.
-     *
-     * @param  array  $params
-     *
-     * @return array
-     */
     public function getItems(array $params = []): array
     {
         $cacheKey = $this->cacheService->generateCacheKey();

@@ -17,3 +17,7 @@ Vagrantfile
 .editorconfig
 aliases
 after.sh
+mysql_backup
+postgres_backup
+.phpstorm.meta.php
+_ide_helper.php

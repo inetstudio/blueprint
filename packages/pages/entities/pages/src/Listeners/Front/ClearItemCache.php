@@ -2,24 +2,12 @@
 
 namespace Packages\PagesPackage\Pages\Listeners\Front;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
-
-/**
- * Class ClearItemCache.
- */
 final class ClearItemCache
 {
-    /**
-     * Handle the event.
-     *
-     * @param $event
-     *
-     * @throws BindingResolutionException
-     */
     public function handle($event): void
     {
-        $cacheService = app()->make('InetStudio\CachePackage\Cache\Contracts\Services\Front\CacheServiceContract');
-        $pagesService = app()->make('InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract');
+        $cacheService = resolve('InetStudio\CachePackage\Cache\Contracts\Services\Front\CacheServiceContract');
+        $pagesService = resolve('InetStudio\PagesPackage\Pages\Contracts\Services\Front\ItemsServiceContract');
 
         $item = $event->item->fresh();
 

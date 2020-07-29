@@ -17,21 +17,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Elasticsearch\ClientBuilder as ElasticBuilder;
 
-/**
- * Class InetStudioServiceProvider.
- */
 class InetStudioServiceProvider extends ServiceProvider
 {
-    /**
-     * @var bool
-     */
     protected bool $configIsCached = false;
 
-    /**
-     * Service Provider Boot.
-     *
-     * @param  Router  $router
-     */
     public function boot(Router $router): void
     {
         $this->configIsCached = $this->app->configurationIsCached();
@@ -55,11 +44,6 @@ class InetStudioServiceProvider extends ServiceProvider
     {
     }
 
-    /**
-     * Acl Package Boot.
-     *
-     * @param  Router  $router
-     */
     protected function bootAclPackage(Router $router): void
     {
         // Activations
@@ -180,9 +164,6 @@ class InetStudioServiceProvider extends ServiceProvider
         $router->aliasMiddleware('ability', 'Laratrust\Middleware\LaratrustAbility');
     }
 
-    /**
-     * Admin Panel Package Boot.
-     */
     protected function bootAdminPanelPackage(): void
     {
         // Base
@@ -290,6 +271,8 @@ class InetStudioServiceProvider extends ServiceProvider
             if (Str::endsWith($expression, ".js'")) {
                 return "<script>\n".$include.'</script>';
             }
+
+            return '';
         });
 
         Arr::macro('changeKeysCase', function (array $arr, int $case = CASE_LOWER) {
@@ -369,9 +352,6 @@ class InetStudioServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Cache Package Boot.
-     */
     protected function bootCachePackage(): void
     {
         if (! $this->app->runningInConsole()) {
@@ -385,9 +365,6 @@ class InetStudioServiceProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Captcha Package Boot.
-     */
     protected function bootCaptchaPackage(): void
     {
         if (! $this->configIsCached) {
@@ -398,9 +375,6 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Feedback Package Boot.
-     */
     protected function bootFeedbackPackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/feedback/entities/feedback/routes/web.php');
@@ -422,9 +396,6 @@ class InetStudioServiceProvider extends ServiceProvider
         Event::listen('InetStudio\ACL\Users\Contracts\Events\Front\SocialRegisteredEventContract', 'InetStudio\FeedbackPackage\Feedback\Contracts\Listeners\Front\AttachUserToItemsListenerContract');
     }
 
-    /**
-     * Mainpage Package Boot.
-     */
     protected function bootMainpagePackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../packages/mainpage/entities/mainpage/routes/web.php');
@@ -432,9 +403,6 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../packages/mainpage/entities/mainpage/resources/views', 'packages.mainpage.app');
     }
 
-    /**
-     * Meta Package Boot.
-     */
     protected function bootMetaPackage(): void
     {
         $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/meta/entities/meta/resources/views', 'admin.module.meta');
@@ -459,9 +427,6 @@ class InetStudioServiceProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Pages Package Boot.
-     */
     protected function bootPagesPackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/pages/entities/pages/routes/web.php');
@@ -484,9 +449,6 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Search Package Boot.
-     */
     protected function bootSearchPackage(): void
     {
         app(EngineManager::class)->extend('elasticsearch', function () {
@@ -502,9 +464,6 @@ class InetStudioServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Simple Counters Package Boot.
-     */
     protected function bootSimpleCountersPackage(): void
     {
         if (! $this->configIsCached) {
@@ -515,9 +474,6 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Sitemap Package Boot.
-     */
     protected function bootSitemapPackage(): void
     {
         if ($this->app->runningInConsole()) {
@@ -534,9 +490,6 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Uploads Package Boot.
-     */
     protected function bootUploadsPackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/uploads/routes/web.php');
@@ -555,9 +508,6 @@ class InetStudioServiceProvider extends ServiceProvider
         FormBuilder::component('imagesStack', 'admin.module.uploads::back.forms.stacks.images', ['name', 'value', 'attributes']);
     }
 
-    /**
-     * Widgets Package Boot.
-     */
     protected function bootWidgetsPackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/widgets/entities/widgets/routes/web.php');

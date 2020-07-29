@@ -29,6 +29,12 @@ return [
             ],
             'fields' => [],
         ],
+        'canonical' => [
+            'meta' => [
+                'canonical',
+            ],
+            'fields' => [],
+        ],
         'og_title' => [
             'meta' => [
                 'og:title',
@@ -56,5 +62,5 @@ return [
         ],
     ],
 
-    'trailing_slash' => false,
+    'trailing_slash' => true,
 ];

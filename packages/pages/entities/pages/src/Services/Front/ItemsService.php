@@ -7,22 +7,10 @@ use InetStudio\PagesPackage\Pages\Contracts\Models\PageModelContract;
 use InetStudio\CachePackage\Cache\Contracts\Services\Front\CacheServiceContract;
 use InetStudio\PagesPackage\Pages\Services\Front\ItemsService as PackageItemsService;
 
-/**
- * Class ItemsService.
- */
 final class ItemsService extends PackageItemsService
 {
-    /**
-     * @var CacheServiceContract
-     */
     protected CacheServiceContract $cacheService;
 
-    /**
-     * ItemsService constructor.
-     *
-     * @param  CacheServiceContract  $cacheService
-     * @param  PageModelContract  $model
-     */
     public function __construct(CacheServiceContract $cacheService, PageModelContract $model)
     {
         parent::__construct($model);
@@ -30,14 +18,6 @@ final class ItemsService extends PackageItemsService
         $this->cacheService = $cacheService;
     }
 
-    /**
-     * Получаем объект по slug.
-     *
-     * @param  string  $slug
-     * @param  array  $params
-     *
-     * @return mixed
-     */
     public function getItemBySlug(string $slug, array $params = [])
     {
         $cacheKey = $this->cacheService->generateCacheKey();
