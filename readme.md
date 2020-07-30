@@ -7,7 +7,7 @@
 - modify Homestead.yaml
 - vagrant up
 - vagrant ssh
-- mv .env.local .env
+- cp .env.local .env
 - php artisan key:generate
 - php artisan storage:link
 - yarn install
