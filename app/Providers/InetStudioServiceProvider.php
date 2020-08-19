@@ -420,6 +420,8 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../packages/receipts-contest/entities/receipts/resources/views', 'packages.receipts-contest.receipts.app');
         view()->getFinder()->prependNamespace('admin.module.receipts-contest.receipts', __DIR__.'/../../packages/receipts-contest/entities/receipts/resources/views');
 
+        $this->loadTranslationsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/resources/lang', 'receipts-contest.receipts');
+
         if (! $this->configIsCached) {
             $this->mergeConfigFrom(
                 __DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/config/filesystems.php',
