@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap(
             [
                 'meta' => 'InetStudio\MetaPackage\Meta\Models\MetaModel',
-                'pages' => 'Packages\PagesPackage\Pages\Models\PageModel',
+                'pages' => 'InetStudio\PagesPackage\Pages\Models\PageModel',
                 'widgets' => 'InetStudio\WidgetsPackage\Widgets\Models\WidgetModel',
             ]
         );

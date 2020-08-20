@@ -28,6 +28,7 @@ set('default_stage', 'test');
 inventory('hosts.yaml');
 
 // Tasks
+task('artisan:optimize', function () {});
 
 // Copy assets to host
 task('copy:assets', function () {
@@ -71,9 +72,6 @@ task('files:prod_environment', function () {
 after('deploy:shared', 'files:prod_environment');
 
 after('deploy:shared', 'copy:assets');
-
-desc('Execute artisan route:cache');
-after('artisan:optimize', 'artisan:route:cache');
 
 desc('Restart PHP-FPM service');
 task('php-fpm:restart', function () {

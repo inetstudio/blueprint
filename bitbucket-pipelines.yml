@@ -1,4 +1,47 @@
-image: alpine
+definitions:
+  steps:
+    - step: &composer
+        name: Install PHP packages
+        image: composer
+        script:
+          - composer install --no-scripts --ignore-platform-reqs
+        artifacts:
+          - vendor/**
+    - step: &assets
+        name: Build assets
+        image: node
+        script:
+          - apt-get update && apt-get install -y git
+          - yarn install
+          - mv .env.$BITBUCKET_BRANCH .env
+          - npm run $BITBUCKET_BRANCH
+        artifacts:
+          - .env
+          - public/admin/**
+    - step: &deploy
+        name: Deploy to server
+        image: pipelinecomponents/deployer
+        deployment: test
+        script:
+          - apk --no-cache add tzdata
+          - export VERSION=$(TZ=":Europe/Moscow" date +v%y.%-m.%-d%-H%M)
+          - printf $VERSION > public/release
+          - dep deploy $BITBUCKET_BRANCH
+        artifacts:
+          - public/release
+    - step: &sentry
+        name: Sentry Release
+        image: getsentry/sentry-cli
+        script:
+          - apk --no-cache add git
+          - export VERSION=$(cat public/release)
+          - export SENTRY_VERSION=$VERSION-$VERSION_POSTFIX
+          - sentry-cli releases -o "${SENTRY_ORG}" new -p "${SENTRY_PROJECT_BACKEND}" -p "${SENTRY_PROJECT_FRONTEND}" "${SENTRY_VERSION}"
+          - sentry-cli releases -o "${SENTRY_ORG}" set-commits "${SENTRY_VERSION}" --auto
+          - sentry-cli releases -o "${SENTRY_ORG}" finalize "${SENTRY_VERSION}"
+          - sentry-cli releases -o "${SENTRY_ORG}" deploys "${SENTRY_VERSION}" new -e "${BITBUCKET_BRANCH}"
+          - git tag -a ${VERSION} -m "Build ${BITBUCKET_BUILD_NUMBER}"
+          - git push origin --tags
 
 pipelines:
   tags:
@@ -28,70 +71,14 @@ pipelines:
             - dep rollback:full test
   branches:
     production:
+      - step: *composer
+      - step: *assets
       - step:
-          name: Build assets
-          script:
-            - apk --no-cache add git yarn nodejs npm php7 php7-pdo php7-curl php7-tokenizer php7-fileinfo php7-ctype php7-bcmath php7-imagick php7-dom php7-simplexml php7-xmlreader php7-json php7-gd php7-exif php7-xmlwriter php7-xml php7-zip composer tzdata
-            - export VERSION=$(TZ=":Europe/Moscow" date +v%y.%-m.%-d%-H%M)
-            - printf $VERSION > public/release
-            - mv .env.production .env
-            - composer install --no-scripts
-            - yarn install
-            - npm run prod
-          artifacts:
-            - public/admin/**
-            - public/release
-            - .env
-      - step:
-          name: Deploy to production server
-          image: pipelinecomponents/deployer
+          <<: *deploy
           deployment: production
-          script:
-            - dep deploy production
-      - step:
-          name: Sentry Release
-          image: getsentry/sentry-cli
-          script:
-            - apk --no-cache add git
-            - export VERSION=$(cat public/release)
-            - export SENTRY_VERSION=$VERSION-$VERSION_POSTFIX
-            - sentry-cli releases -o "${SENTRY_ORG}" new -p "${SENTRY_PROJECT_BACKEND}" -p "${SENTRY_PROJECT_FRONTEND}" "${SENTRY_VERSION}"
-            - sentry-cli releases -o "${SENTRY_ORG}" set-commits "${SENTRY_VERSION}" --auto
-            - sentry-cli releases -o "${SENTRY_ORG}" finalize "${SENTRY_VERSION}"
-            - sentry-cli releases -o "${SENTRY_ORG}" deploys "${SENTRY_VERSION}" new -e "production"
-            - git tag -a ${VERSION} -m "Build ${BITBUCKET_BUILD_NUMBER}"
-            - git push origin --tags
+      - step: *sentry
     test:
-      - step:
-          name: Build admin assets
-          script:
-            - apk --no-cache add git yarn nodejs npm php7 php7-pdo php7-curl php7-tokenizer php7-fileinfo php7-ctype php7-bcmath php7-imagick php7-dom php7-simplexml php7-xmlreader php7-json php7-gd php7-exif php7-xmlwriter php7-xml php7-zip composer tzdata
-            - export VERSION=$(TZ=":Europe/Moscow" date +v%y.%-m.%-d%-H%M)
-            - printf $VERSION > public/release
-            - mv .env.test .env
-            - composer install --no-scripts
-            - yarn install
-            - npm run dev
-          artifacts:
-            - public/admin/**
-            - public/release
-            - .env
-      - step:
-          name: Deploy to test server
-          image: pipelinecomponents/deployer
-          deployment: test
-          script:
-            - dep deploy test
-      - step:
-          name: Sentry Release
-          image: getsentry/sentry-cli
-          script:
-            - apk --no-cache add git
-            - export VERSION=$(cat public/release)
-            - export SENTRY_VERSION=$VERSION-$VERSION_POSTFIX
-            - sentry-cli releases -o "${SENTRY_ORG}" new -p "${SENTRY_PROJECT_BACKEND}" -p "${SENTRY_PROJECT_FRONTEND}" "${SENTRY_VERSION}"
-            - sentry-cli releases -o "${SENTRY_ORG}" set-commits "${SENTRY_VERSION}" --auto
-            - sentry-cli releases -o "${SENTRY_ORG}" finalize "${SENTRY_VERSION}"
-            - sentry-cli releases -o "${SENTRY_ORG}" deploys "${SENTRY_VERSION}" new -e "test"
-            - git tag -a ${VERSION} -m "Build ${BITBUCKET_BUILD_NUMBER}"
-            - git push origin --tags
+      - step: *composer
+      - step: *assets
+      - step: *deploy
+      - step: *sentry
