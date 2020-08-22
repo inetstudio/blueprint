@@ -1704,16 +1704,16 @@
         },
         {
             "name": "inetstudio/checks-contest",
-            "version": "v7.17.5",
+            "version": "v7.17.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inetstudio/checks-contest.git",
-                "reference": "e575ebd3911965a1cffa5633dd9da4c0c2d3ad3b"
+                "reference": "522a36eec3945e7675e8087f5b5adbb5b1dd3827"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inetstudio/checks-contest/zipball/e575ebd3911965a1cffa5633dd9da4c0c2d3ad3b",
-                "reference": "e575ebd3911965a1cffa5633dd9da4c0c2d3ad3b",
+                "url": "https://api.github.com/repos/inetstudio/checks-contest/zipball/522a36eec3945e7675e8087f5b5adbb5b1dd3827",
+                "reference": "522a36eec3945e7675e8087f5b5adbb5b1dd3827",
                 "shasum": ""
             },
             "require": {
@@ -1758,7 +1758,7 @@
             ],
             "description": "Package for receipts contest",
             "homepage": "https://github.com/inetstudio/checks-contest",
-            "time": "2020-08-11T11:11:52+00:00"
+            "time": "2020-08-21T10:39:32+00:00"
         },
         {
             "name": "inetstudio/classifiers",
@@ -5856,16 +5856,16 @@
         },
         {
             "name": "spatie/data-transfer-object",
-            "version": "2.2.1",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/data-transfer-object.git",
-                "reference": "c88e8442cae2ffe01aaca8f557551f81e18a1967"
+                "reference": "875266070431a0ca50584d07996e76065e31e78e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/data-transfer-object/zipball/c88e8442cae2ffe01aaca8f557551f81e18a1967",
-                "reference": "c88e8442cae2ffe01aaca8f557551f81e18a1967",
+                "url": "https://api.github.com/repos/spatie/data-transfer-object/zipball/875266070431a0ca50584d07996e76065e31e78e",
+                "reference": "875266070431a0ca50584d07996e76065e31e78e",
                 "shasum": ""
             },
             "require": {
@@ -5875,6 +5875,9 @@
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "larapack/dd": "^1.0",
                 "phpunit/phpunit": "^7.0"
+            },
+            "suggest": {
+                "phpstan/phpstan": "Take advantage of checkUninitializedProperties with \\Spatie\\DataTransferObject\\PHPstan\\PropertiesAreAlwaysInitializedExtension"
             },
             "type": "library",
             "autoload": {
@@ -5906,7 +5909,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-05-13T12:53:16+00:00"
+            "time": "2020-08-19T13:28:17+00:00"
         },
         {
             "name": "spatie/image",
@@ -9247,16 +9250,16 @@
         },
         {
             "name": "composer/xdebug-handler",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/xdebug-handler.git",
-                "reference": "fa2aaf99e2087f013a14f7432c1cd2dd7d8f1f51"
+                "reference": "ebd27a9866ae8254e873866f795491f02418c5a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/fa2aaf99e2087f013a14f7432c1cd2dd7d8f1f51",
-                "reference": "fa2aaf99e2087f013a14f7432c1cd2dd7d8f1f51",
+                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/ebd27a9866ae8254e873866f795491f02418c5a5",
+                "reference": "ebd27a9866ae8254e873866f795491f02418c5a5",
                 "shasum": ""
             },
             "require": {
@@ -9287,7 +9290,21 @@
                 "Xdebug",
                 "performance"
             ],
-            "time": "2020-06-04T11:16:35+00:00"
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-08-19T10:27:58+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -10676,6 +10693,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {

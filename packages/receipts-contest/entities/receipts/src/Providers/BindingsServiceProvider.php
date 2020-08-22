@@ -13,7 +13,7 @@ final class BindingsServiceProvider extends PackageBindingsServiceProvider
 
         $this->bindings['InetStudio\ReceiptsContest\Receipts\Contracts\Console\Commands\ModerateCommandContract'] = 'Packages\ReceiptsContest\Receipts\Console\Commands\ModerateCommand';
         $this->bindings['InetStudio\ReceiptsContest\Receipts\Contracts\Console\Commands\SetWinnerCommandContract'] = 'Packages\ReceiptsContest\Receipts\Console\Commands\SetWinnerCommand';
-        $this->bindings['InetStudio\ReceiptsContest\Receipts\Http\Requests\Front\SendRequest'] = 'Packages\ReceiptsContest\Receipts\Http\Requests\Front\SendRequest';
+        $this->bindings['InetStudio\ReceiptsContest\Receipts\Contracts\Http\Requests\Front\SendRequestContract'] = 'Packages\ReceiptsContest\Receipts\Http\Requests\Front\SendRequest';
         $this->bindings['InetStudio\ReceiptsContest\Receipts\Contracts\Services\Front\ItemsServiceContract'] = 'Packages\ReceiptsContest\Receipts\Services\Front\ItemsService';
     }
 }
