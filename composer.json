@@ -1,36 +1,34 @@
 {
-    "name": "laravel/laravel",
+    "name": "inetstudio/blueprint",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
+    "description": "Blueprint",
     "license": "MIT",
     "require": {
         "php": "^7.4",
-        "barryvdh/laravel-debugbar": "^3.2.3",
+        "barryvdh/laravel-debugbar": "^3.5.1",
+        "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
-        "fruitcake/laravel-cors": "^1.0",
+        "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
-        "inetstudio/admin-panel": "^7.0",
-        "inetstudio/checks-contest": "^7.0",
-        "inetstudio/feedback": "^7.0",
-        "inetstudio/pages": "^7.0",
-        "inetstudio/sitemap": "^7.0",
-        "laravel/framework": "^7.0",
+        "inetstudio/admin-panel": "^8.0",
+        "inetstudio/checks-contest": "^8.0",
+        "inetstudio/feedback": "^8.0",
+        "inetstudio/pages": "^8.0",
+        "inetstudio/sitemap": "^8.0",
+        "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "sentry/sentry-laravel": "^1.0.0"
+        "mcaskill/composer-exclude-files": "^2.0",
+        "sentry/sentry-laravel": "^2.1.1"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.6.1",
-        "beyondcode/laravel-dump-server": "^1.0",
-        "filp/whoops": "~2.0",
+        "barryvdh/laravel-ide-helper": "^2.8.1",
+        "beyondcode/laravel-dump-server": "^1.5.0",
+        "filp/whoops": "~2.8.0",
         "fzaninotto/faker": "^1.9.1",
-        "laravel/homestead": "^11",
+        "laravel/homestead": "^10.0",
         "mockery/mockery": "^1.3.1",
-        "nunomaduro/collision": "^4.1",
-        "phpunit/phpunit": "^8.5"
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3"
     },
     "config": {
         "optimize-autoloader": true,
@@ -38,6 +36,9 @@
         "sort-packages": true
     },
     "extra": {
+        "exclude-from-files": [
+            "elasticsearch/elasticsearch/src/autoload.php"
+        ],
         "laravel": {
             "dont-discover": [
                 "inetstudio/acl",
@@ -78,6 +79,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/",
             "Packages\\ReceiptsContest\\Receipts\\": "packages/receipts-contest/entities/receipts/src",
             "Packages\\ReceiptsContest\\Products\\": "packages/receipts-contest/entities/products/src",
             "Packages\\FeedbackPackage\\Feedback\\": "packages/feedback/entities/feedback/src",
@@ -86,11 +89,7 @@
             "Packages\\PagesPackage\\Pages\\": "packages/pages/entities/pages/src",
             "Packages\\SitemapPackage\\Sitemap\\": "packages/sitemap/entities/sitemap/src",
             "Packages\\Uploads\\": "packages/uploads/entities/uploads/src"
-        },
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
