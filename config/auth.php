@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => 'InetStudio\ACL\Users\Models\UserModel',
+            'model' => InetStudio\ACL\Users\Models\UserModel::class,
         ],
 
         // 'users' => [
