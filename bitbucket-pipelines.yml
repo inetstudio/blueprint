@@ -25,18 +25,18 @@ definitions:
         script:
           - apk --no-cache add tzdata
           - export VERSION=$(TZ=":Europe/Moscow" date +v%y.%-m.%-d%-H%M)
-          - printf $VERSION > public/release
+          - printf $VERSION > release
           - dep deploy $BITBUCKET_BRANCH
         artifacts:
-          - public/release
+          - release
     - step: &sentry
         name: Sentry Release
         image: getsentry/sentry-cli
         script:
           - apk --no-cache add git
-          - export VERSION=$(cat public/release)
+          - export VERSION=$(cat release)
           - export SENTRY_VERSION=$VERSION-$VERSION_POSTFIX
-          - sentry-cli releases -o "${SENTRY_ORG}" new -p "${SENTRY_PROJECT_BACKEND}" -p "${SENTRY_PROJECT_FRONTEND}" "${SENTRY_VERSION}"
+          - sentry-cli releases -o "${SENTRY_ORG}" new -p "${SENTRY_PROJECT_BACKEND}" "${SENTRY_VERSION}"
           - sentry-cli releases -o "${SENTRY_ORG}" set-commits "${SENTRY_VERSION}" --auto
           - sentry-cli releases -o "${SENTRY_ORG}" finalize "${SENTRY_VERSION}"
           - sentry-cli releases -o "${SENTRY_ORG}" deploys "${SENTRY_VERSION}" new -e "${BITBUCKET_BRANCH}"
