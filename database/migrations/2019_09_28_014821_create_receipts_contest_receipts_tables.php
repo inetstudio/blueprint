@@ -15,7 +15,7 @@ class CreateReceiptsContestReceiptsTables extends Migration
     {
         Schema::create('receipts_contest_receipts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fns_receipt_id')->index()->default(0);
+            $table->string('fns_receipt_id')->nullable()->index();
             $table->string('verify_hash')->default('');
             $table->json('receipt_data')->nullable();
             $table->json('additional_info')->nullable();
