@@ -33,19 +33,11 @@ task('artisan:optimize', function () {});
 
 // Copy assets to host
 task('copy:assets', function () {
-    $defaultRsyncOptions = get('rsync');
-    $defaultRsyncOptions['exclude'] = [
-        '*',
-    ];
-    $defaultRsyncOptions['include'] = [
-        'admin/***',
-        'release'
-    ];
-    set('rsync', $defaultRsyncOptions);
-    set('rsync_src', __DIR__.'/public');
-    set('rsync_dest','{{release_path}}/public');
+    upload(__DIR__.'/public/admin/', '{{release_path}}/public/admin/');
+});
 
-    invoke('rsync');
+task('copy:release', function () {
+    upload('release', '{{release_path}}/release');
 });
 
 // Deploy
@@ -73,12 +65,19 @@ task('files:prod_environment', function () {
 after('deploy:shared', 'files:prod_environment');
 
 after('deploy:shared', 'copy:assets');
+after('copy:assets', 'copy:release');
 
 desc('Restart PHP-FPM service');
 task('php-fpm:restart', function () {
     run('sudo systemctl restart php7.4-fpm.service');
 });
 after('deploy:symlink', 'php-fpm:restart');
+
+desc('Restart queue service');
+task('queue:restart', function () {
+    run('sudo systemctl restart queue_'.get('project_alias'));
+});
+after('php-fpm:restart', 'queue:restart');
 
 before('deploy:symlink', 'deploy:public_disk');
 before('deploy:symlink', 'artisan:migrate');

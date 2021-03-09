@@ -14,9 +14,9 @@ class CreateFnsReceiptsTables extends Migration
     public function up()
     {
         Schema::create('fns_receipts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id')->primary();
             $table->string('qr_code', 500)->nullable();
-            $table->json('receipt')->nullable();
+            $table->json('data')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

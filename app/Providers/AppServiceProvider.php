@@ -75,10 +75,6 @@ class AppServiceProvider extends ServiceProvider
         }
 
         if ($this->app->isLocal()) {
-            if ($isConsole) {
-                $this->app->register('Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider');
-            }
-
             if (config('app.debug') || $isConsole) {
                 $this->app->register('BeyondCode\DumpServer\DumpServerServiceProvider');
 

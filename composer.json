@@ -6,10 +6,9 @@
     "require": {
         "php": "^7.4",
         "barryvdh/laravel-debugbar": "^3.5.1",
-        "doctrine/dbal": "^2.10",
+        "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^6.3",
         "inetstudio/admin-panel": "^8.0",
         "inetstudio/checks-contest": "^8.0",
         "inetstudio/feedback": "^8.0",
@@ -21,12 +20,10 @@
         "sentry/sentry-laravel": "^2.1.1"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.8.1",
         "beyondcode/laravel-dump-server": "^1.5.0",
-        "filp/whoops": "~2.8.0",
-        "fzaninotto/faker": "^1.9.1",
-        "laravel/homestead": "^11.0",
-        "mockery/mockery": "^1.3.1",
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3"
     },
@@ -83,11 +80,9 @@
             "Database\\Seeders\\": "database/seeders/",
             "Packages\\ReceiptsContest\\Receipts\\": "packages/receipts-contest/entities/receipts/src",
             "Packages\\ReceiptsContest\\Products\\": "packages/receipts-contest/entities/products/src",
-            "Packages\\FeedbackPackage\\Feedback\\": "packages/feedback/entities/feedback/src",
             "Packages\\MainPagePackage\\MainPage\\": "packages/mainpage/entities/mainpage/src",
             "Packages\\MetaPackage\\Meta\\": "packages/meta/entities/meta/src",
             "Packages\\PagesPackage\\Pages\\": "packages/pages/entities/pages/src",
-            "Packages\\SitemapPackage\\Sitemap\\": "packages/sitemap/entities/sitemap/src",
             "Packages\\Uploads\\": "packages/uploads/entities/uploads/src"
         }
     },
