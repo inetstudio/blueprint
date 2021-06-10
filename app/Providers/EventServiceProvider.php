@@ -15,6 +15,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        'App\Events\AuditEvent' => [
+            'App\Listeners\LogActionListener',
+        ],
         'InetStudio\PagesPackage\Pages\Contracts\Events\Back\ModifyItemEventContract' => [
             'Packages\PagesPackage\Pages\Listeners\Front\ClearItemCache',
         ],
