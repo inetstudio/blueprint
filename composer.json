@@ -4,7 +4,7 @@
     "description": "Blueprint",
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^8.0",
         "barryvdh/laravel-debugbar": "^3.5.1",
         "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.0",
