@@ -29,14 +29,18 @@ class InetStudioServiceProvider extends ServiceProvider
         $this->bootAdminPanelPackage();
         $this->bootCachePackage();
         $this->bootCaptchaPackage();
+        $this->bootClassifiersPackage();
         $this->bootFeedbackPackage();
+        $this->bootInstagramPackage();
         $this->bootMainpagePackage();
         $this->bootMetaPackage();
         $this->bootPagesPackage();
         $this->bootSearchPackage();
         $this->bootSimpleCountersPackage();
         $this->bootSitemapPackage();
+        $this->bootSocialContestPackage();
         $this->bootUploadsPackage();
+        $this->bootVkontaktePackage();
         $this->bootWidgetsPackage();
     }
 
@@ -375,6 +379,35 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
+    protected function bootClassifiersPackage(): void
+    {
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/classifiers/package/resources/views', 'admin.module.classifiers');
+
+        // Entries
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/classifiers/entities/entries/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/classifiers/entities/entries/resources/views', 'admin.module.classifiers.entries');
+        view()->getFinder()->prependNamespace('admin.module.classifiers.entries', __DIR__.'/../../packages/classifiers/entities/entries/resources/views');
+
+        FormBuilder::component(
+            'classifiers',
+            'admin.module.classifiers.entries::back.forms.fields.entries',
+            ['name' => null, 'value' => null, 'attributes' => null]
+        );
+
+        // Groups
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/classifiers/entities/groups/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/classifiers/entities/groups/resources/views', 'admin.module.classifiers.groups');
+        view()->getFinder()->prependNamespace('admin.module.classifiers.groups', __DIR__.'/../../packages/classifiers/entities/groups/resources/views');
+
+        FormBuilder::component(
+            'classifiers_groups',
+            'admin.module.classifiers.groups::back.forms.fields.groups',
+            ['name' => null, 'value' => null, 'attributes' => null]
+        );
+    }
+
     protected function bootFeedbackPackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/feedback/entities/feedback/routes/web.php');
@@ -394,6 +427,54 @@ class InetStudioServiceProvider extends ServiceProvider
 
         Event::listen('InetStudio\ACL\Activations\Contracts\Events\Front\ActivatedEventContract', 'InetStudio\FeedbackPackage\Feedback\Contracts\Listeners\Front\AttachUserToItemsListenerContract');
         Event::listen('InetStudio\ACL\Users\Contracts\Events\Front\SocialRegisteredEventContract', 'InetStudio\FeedbackPackage\Feedback\Contracts\Listeners\Front\AttachUserToItemsListenerContract');
+    }
+
+    protected function bootInstagramPackage(): void
+    {
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/instagram/package/config/services.php', 'services'
+            );
+        }
+
+        // Posts
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/instagram/entities/posts/config/filesystems.php',
+                'filesystems.disks'
+            );
+
+            $this->mergeConfigFrom(
+                __DIR__.'/../../packages/instagram/entities/posts/config/instagram_posts.php',
+                'instagram_posts'
+            );
+        }
+
+        // Stories
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/instagram/entities/stories/config/filesystems.php',
+                'filesystems.disks'
+            );
+
+            $this->mergeConfigFrom(
+                __DIR__.'/../../packages/instagram/entities/stories/config/instagram_stories.php',
+                'instagram_stories'
+            );
+        }
+
+        // Users
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/instagram/entities/users/config/filesystems.php',
+                'filesystems.disks'
+            );
+
+            $this->mergeConfigFrom(
+                __DIR__.'/../../packages/instagram/entities/users/config/instagram_users.php',
+                'instagram_users'
+            );
+        }
     }
 
     protected function bootMainpagePackage(): void
@@ -490,6 +571,47 @@ class InetStudioServiceProvider extends ServiceProvider
         }
     }
 
+    protected function bootSocialContestPackage(): void
+    {
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../packages/social-contest/package/config/social_contest.php',
+                'social_contest'
+            );
+        }
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/social-contest/package/resources/views', 'admin.module.social-contest');
+
+        // Posts
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                'InetStudio\SocialContest\Posts\Contracts\Console\Commands\SearchInstagramPostsByTagCommandContract',
+                'InetStudio\SocialContest\Posts\Contracts\Console\Commands\SearchInstagramStoriesByTagCommandContract',
+                'InetStudio\SocialContest\Posts\Contracts\Console\Commands\SearchVkontaktePostsByTagCommandContract',
+
+                'InetStudio\SocialContest\Statuses\Console\Commands\StatusesSeedCommand',
+            ]);
+        }
+
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/social-contest/entities/posts/routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../../packages/social-contest/entities/posts/routes/api.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/social-contest/entities/posts/resources/views', 'admin.module.social-contest.posts');
+        view()->getFinder()->prependNamespace('admin.module.social-contest.posts', __DIR__.'/../../packages/social-contest/entities/posts/resources/views');
+
+        // Prizes
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/social-contest/entities/prizes/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/social-contest/entities/prizes/resources/views', 'admin.module.social-contest.prizes');
+        view()->getFinder()->prependNamespace('admin.module.social-contest.prizes', __DIR__.'/../../packages/social-contest/entities/prizes/resources/views');
+
+        // Statuses
+        $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/social-contest/entities/statuses/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/social-contest/entities/statuses/resources/views', 'admin.module.social-contest.statuses');
+        view()->getFinder()->prependNamespace('admin.module.social-contest.statuses', __DIR__.'/../../packages/social-contest/entities/statuses/resources/views');
+    }
+
     protected function bootUploadsPackage(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/uploads/routes/web.php');
@@ -506,6 +628,41 @@ class InetStudioServiceProvider extends ServiceProvider
         FormBuilder::component('crop', 'admin.module.uploads::back.forms.fields.crop', ['name', 'value', 'attributes']);
         FormBuilder::component('files', 'admin.module.uploads::back.forms.fields.files', ['name', 'value', 'attributes']);
         FormBuilder::component('imagesStack', 'admin.module.uploads::back.forms.stacks.images', ['name', 'value', 'attributes']);
+    }
+
+    protected function bootVkontaktePackage(): void
+    {
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/vkontakte/package/config/services.php', 'services'
+            );
+        }
+
+        // Posts
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/vkontakte/entities/posts/config/filesystems.php',
+                'filesystems.disks'
+            );
+
+            $this->mergeConfigFrom(
+                __DIR__.'/../../packages/vkontakte/entities/posts/config/vkontakte_posts.php',
+                'vkontakte_posts'
+            );
+        }
+
+        // Users
+        if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/vkontakte/entities/users/config/filesystems.php',
+                'filesystems.disks'
+            );
+
+            $this->mergeConfigFrom(
+                __DIR__.'/../../packages/vkontakte/entities/users/config/vkontakte_users.php',
+                'vkontakte_users'
+            );
+        }
     }
 
     protected function bootWidgetsPackage(): void

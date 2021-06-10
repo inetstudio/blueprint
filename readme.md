@@ -14,6 +14,7 @@
 - docker-compose exec php php artisan migrate
 - docker-compose exec php php artisan inetstudio:acl:roles:seed
 - docker-compose exec php php artisan inetstudio:acl:users:admin (admin / password)
+- docker-compose exec php php artisan inetstudio:social-contest:statuses:seed
 
 <p><strong>Build admin panel front</strong></p>
 

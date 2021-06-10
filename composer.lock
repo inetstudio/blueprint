@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6794a095e08a2cf57531f4dc6cb4229d",
+    "content-hash": "671abf759abd8a61f7b5305d8e8781cc",
     "packages": [
         {
             "name": "arcanedev/php-html",
@@ -614,6 +614,52 @@
                 }
             ],
             "time": "2021-05-24T07:46:03+00:00"
+        },
+        {
+            "name": "corneltek/getoptionkit",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/c9s/GetOptionKit.git",
+                "reference": "995607ddf4fc90ebdb4a7d58fe972d581ad8495f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/995607ddf4fc90ebdb4a7d58fe972d581ad8495f",
+                "reference": "995607ddf4fc90ebdb4a7d58fe972d581ad8495f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GetOptionKit\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yo-An Lin",
+                    "email": "yoanlin93@gmail.com"
+                }
+            ],
+            "description": "Powerful command-line option toolkit",
+            "homepage": "http://github.com/c9s/GetOptionKit",
+            "support": {
+                "issues": "https://github.com/c9s/GetOptionKit/issues",
+                "source": "https://github.com/c9s/GetOptionKit/tree/2.6.0"
+            },
+            "time": "2017-06-30T14:54:48+00:00"
         },
         {
             "name": "cviebrock/eloquent-sluggable",
@@ -1401,6 +1447,54 @@
                 "source": "https://github.com/elastic/elasticsearch-php/tree/v7.13.0"
             },
             "time": "2021-05-25T20:30:27+00:00"
+        },
+        {
+            "name": "emojione/emojione",
+            "version": "4.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/emojione/emojione.git",
+                "reference": "79e685356877cbb6128074a71b7f88f435b58412"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/emojione/emojione/zipball/79e685356877cbb6128074a71b7f88f435b58412",
+                "reference": "79e685356877cbb6128074a71b7f88f435b58412",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.6 || ~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Emojione\\": "lib/php/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "(CC-BY-4.0 and MIT)"
+            ],
+            "description": "EmojiOne is a complete set of emojis designed for the web. It includes libraries to easily convert unicode characters to shortnames (:smile:) and shortnames to our custom emoji images. PNG format provided for the emoji images.",
+            "homepage": "http://www.emojione.com",
+            "keywords": [
+                "emoji",
+                "emojione",
+                "emojis",
+                "emoticons",
+                "smileys",
+                "smilies",
+                "unicode"
+            ],
+            "support": {
+                "issues": "https://github.com/emojione/emojione/issues",
+                "source": "https://github.com/emojione/emojione/tree/4.5.0"
+            },
+            "abandoned": true,
+            "time": "2019-02-15T01:32:20+00:00"
         },
         {
             "name": "ezimuel/guzzlestreams",
@@ -2294,6 +2388,60 @@
             "time": "2020-09-21T08:50:53+00:00"
         },
         {
+            "name": "inetstudio/classifiers",
+            "version": "v8.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inetstudio/classifiers.git",
+                "reference": "eb0bd89d2367d2311185798c36cafd9df18b7def"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inetstudio/classifiers/zipball/eb0bd89d2367d2311185798c36cafd9df18b7def",
+                "reference": "eb0bd89d2367d2311185798c36cafd9df18b7def",
+                "shasum": ""
+            },
+            "require": {
+                "inetstudio/admin-panel": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InetStudio\\Classifiers\\Providers\\ServiceProvider",
+                        "InetStudio\\Classifiers\\Entries\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\Classifiers\\Entries\\Providers\\ServiceProvider",
+                        "InetStudio\\Classifiers\\Groups\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\Classifiers\\Groups\\Providers\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InetStudio\\Classifiers\\": "package/src/",
+                    "InetStudio\\Classifiers\\Entries\\": "entities/entries/src/",
+                    "InetStudio\\Classifiers\\Groups\\": "entities/groups/src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Bukin",
+                    "email": "bukin@inetstudio.ru"
+                }
+            ],
+            "description": "Package for classifiers",
+            "homepage": "https://github.com/inetstudio/classifiers",
+            "support": {
+                "issues": "https://github.com/inetstudio/classifiers/issues",
+                "source": "https://github.com/inetstudio/classifiers/tree/v8.0.1"
+            },
+            "time": "2021-04-07T17:33:48+00:00"
+        },
+        {
             "name": "inetstudio/feedback",
             "version": "v8.0.0",
             "source": {
@@ -2344,6 +2492,72 @@
                 "source": "https://github.com/inetstudio/feedback/tree/v8.0.0"
             },
             "time": "2020-09-21T09:00:42+00:00"
+        },
+        {
+            "name": "inetstudio/instagram",
+            "version": "v8.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inetstudio/instagram.git",
+                "reference": "f4647ada0915c99a75d18e1c694ec0e0aabdd333"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inetstudio/instagram/zipball/f4647ada0915c99a75d18e1c694ec0e0aabdd333",
+                "reference": "f4647ada0915c99a75d18e1c694ec0e0aabdd333",
+                "shasum": ""
+            },
+            "require": {
+                "emojione/emojione": "^4.5",
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.0",
+                "lazyjsonmapper/lazyjsonmapper": "^1.6.1",
+                "php": ">=7.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InetStudio\\Instagram\\Providers\\InstagramBindingsServiceProvider",
+                        "InetStudio\\Instagram\\Providers\\InstagramServiceProvider",
+                        "InetStudio\\Instagram\\Comments\\Providers\\CommentsBindingsServiceProvider",
+                        "InetStudio\\Instagram\\Comments\\Providers\\CommentsServiceProvider",
+                        "InetStudio\\Instagram\\Posts\\Providers\\PostsBindingsServiceProvider",
+                        "InetStudio\\Instagram\\Posts\\Providers\\PostsServiceProvider",
+                        "InetStudio\\Instagram\\Stories\\Providers\\StoriesBindingsServiceProvider",
+                        "InetStudio\\Instagram\\Stories\\Providers\\StoriesServiceProvider",
+                        "InetStudio\\Instagram\\Users\\Providers\\UsersBindingsServiceProvider",
+                        "InetStudio\\Instagram\\Users\\Providers\\UsersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InetStudio\\Instagram\\": "package/src",
+                    "InetStudio\\Instagram\\Comments\\": "entities/comments/src",
+                    "InetStudio\\Instagram\\Posts\\": "entities/posts/src",
+                    "InetStudio\\Instagram\\Stories\\": "entities/stories/src",
+                    "InetStudio\\Instagram\\Users\\": "entities/users/src",
+                    "InstagramAPI\\": "libs/instagram-php/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Bukin",
+                    "email": "bukin@inetstudio.ru"
+                }
+            ],
+            "description": "Package for instagram integration",
+            "homepage": "https://github.com/inetstudio/instagram",
+            "support": {
+                "issues": "https://github.com/inetstudio/instagram/issues",
+                "source": "https://github.com/inetstudio/instagram/tree/v8.0.3"
+            },
+            "time": "2021-04-28T10:06:28+00:00"
         },
         {
             "name": "inetstudio/meta",
@@ -2601,6 +2815,67 @@
             "time": "2020-09-21T09:10:16+00:00"
         },
         {
+            "name": "inetstudio/social-contest",
+            "version": "v8.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inetstudio/social-contest.git",
+                "reference": "9341122beb72be30e32255a94e0d7e03df7d2bb1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inetstudio/social-contest/zipball/9341122beb72be30e32255a94e0d7e03df7d2bb1",
+                "reference": "9341122beb72be30e32255a94e0d7e03df7d2bb1",
+                "shasum": ""
+            },
+            "require": {
+                "inetstudio/admin-panel": "^8.0",
+                "inetstudio/classifiers": "^8.0",
+                "inetstudio/instagram": "^8.0",
+                "inetstudio/vkontakte": "^8.0",
+                "rutorika/sortable": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InetStudio\\SocialContest\\Providers\\ServiceProvider",
+                        "InetStudio\\SocialContest\\Posts\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\SocialContest\\Posts\\Providers\\ServiceProvider",
+                        "InetStudio\\SocialContest\\Prizes\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\SocialContest\\Prizes\\Providers\\ServiceProvider",
+                        "InetStudio\\SocialContest\\Statuses\\Providers\\BindingsServiceProvider",
+                        "InetStudio\\SocialContest\\Statuses\\Providers\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InetStudio\\SocialContest\\": "package/src",
+                    "InetStudio\\SocialContest\\Posts\\": "entities/posts/src",
+                    "InetStudio\\SocialContest\\Prizes\\": "entities/prizes/src",
+                    "InetStudio\\SocialContest\\Statuses\\": "entities/statuses/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Bukin",
+                    "email": "bukin@inetstudio.ru"
+                }
+            ],
+            "description": "Package for social contests",
+            "homepage": "https://github.com/inetstudio/social-contest",
+            "support": {
+                "issues": "https://github.com/inetstudio/social-contest/issues",
+                "source": "https://github.com/inetstudio/social-contest/tree/v8.0.2"
+            },
+            "time": "2021-06-10T10:16:40+00:00"
+        },
+        {
             "name": "inetstudio/uploads",
             "version": "v8.1.0",
             "source": {
@@ -2649,6 +2924,68 @@
                 "source": "https://github.com/inetstudio/uploads/tree/v8.1.0"
             },
             "time": "2021-04-28T08:27:06+00:00"
+        },
+        {
+            "name": "inetstudio/vkontakte",
+            "version": "v8.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inetstudio/vkontakte.git",
+                "reference": "e88b2bfc94da3592101fa94c789d2f40ab1ad40f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inetstudio/vkontakte/zipball/e88b2bfc94da3592101fa94c789d2f40ab1ad40f",
+                "reference": "e88b2bfc94da3592101fa94c789d2f40ab1ad40f",
+                "shasum": ""
+            },
+            "require": {
+                "emojione/emojione": "^4.5",
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.0",
+                "php": ">=7.3",
+                "vkcom/vk-php-sdk": "^5.101"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InetStudio\\Vkontakte\\Providers\\VkontakteBindingsServiceProvider",
+                        "InetStudio\\Vkontakte\\Providers\\VkontakteServiceProvider",
+                        "InetStudio\\Vkontakte\\Comments\\Providers\\CommentsBindingsServiceProvider",
+                        "InetStudio\\Vkontakte\\Comments\\Providers\\CommentsServiceProvider",
+                        "InetStudio\\Vkontakte\\Posts\\Providers\\PostsBindingsServiceProvider",
+                        "InetStudio\\Vkontakte\\Posts\\Providers\\PostsServiceProvider",
+                        "InetStudio\\Vkontakte\\Users\\Providers\\UsersBindingsServiceProvider",
+                        "InetStudio\\Vkontakte\\Users\\Providers\\UsersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InetStudio\\Vkontakte\\": "package/src",
+                    "InetStudio\\Vkontakte\\Comments\\": "entities/comments/src",
+                    "InetStudio\\Vkontakte\\Posts\\": "entities/posts/src",
+                    "InetStudio\\Vkontakte\\Users\\": "entities/users/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Bukin",
+                    "email": "bukin@inetstudio.ru"
+                }
+            ],
+            "description": "Package for vkontakte integration",
+            "homepage": "https://github.com/inetstudio/vkontakte",
+            "support": {
+                "issues": "https://github.com/inetstudio/vkontakte/issues",
+                "source": "https://github.com/inetstudio/vkontakte/tree/v8.0.2"
+            },
+            "time": "2021-04-28T10:06:47+00:00"
         },
         {
             "name": "inetstudio/widgets",
@@ -3453,6 +3790,60 @@
                 "wiki": "https://github.com/Laravelium/laravel-sitemap/wiki"
             },
             "time": "2020-09-10T20:49:55+00:00"
+        },
+        {
+            "name": "lazyjsonmapper/lazyjsonmapper",
+            "version": "v1.6.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lazyjsonmapper/lazyjsonmapper.git",
+                "reference": "0b047af4b48ba8c44bbcdbe8e1e6a53e2303c1bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lazyjsonmapper/lazyjsonmapper/zipball/0b047af4b48ba8c44bbcdbe8e1e6a53e2303c1bb",
+                "reference": "0b047af4b48ba8c44bbcdbe8e1e6a53e2303c1bb",
+                "shasum": ""
+            },
+            "require": {
+                "corneltek/getoptionkit": "2.*",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.7.1",
+                "phpunit/phpunit": "6.*"
+            },
+            "bin": [
+                "bin/lazydoctor"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LazyJsonMapper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "SteveJobzniak",
+                    "homepage": "https://github.com/SteveJobzniak",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Advanced, intelligent & automatic object-oriented JSON containers for PHP.",
+            "homepage": "https://github.com/SteveJobzniak/LazyJsonMapper",
+            "keywords": [
+                "development",
+                "json"
+            ],
+            "support": {
+                "issues": "https://github.com/lazyjsonmapper/lazyjsonmapper/issues",
+                "source": "https://github.com/lazyjsonmapper/lazyjsonmapper/tree/v1.6.4"
+            },
+            "time": "2019-12-05T22:22:33+00:00"
         },
         {
             "name": "league/commonmark",
@@ -6141,6 +6532,63 @@
                 "source": "https://github.com/reactphp/promise/tree/v2.8.0"
             },
             "time": "2020-05-12T15:16:56+00:00"
+        },
+        {
+            "name": "rutorika/sortable",
+            "version": "8.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/boxfrommars/rutorika-sortable.git",
+                "reference": "e179f107238402c46515c31608eba326dc7811dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/boxfrommars/rutorika-sortable/zipball/e179f107238402c46515c31608eba326dc7811dd",
+                "reference": "e179f107238402c46515c31608eba326dc7811dd",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^7.0|^8.0",
+                "php": ">=7.2.5"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~5|~6",
+                "phpunit/phpunit": "~8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Rutorika\\Sortable": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Groza",
+                    "email": "boxfrommars@gmail.com"
+                }
+            ],
+            "description": "Adds sortable behavior and ordering to Laravel Eloquent models. Grouping and many to many supported.",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "laravel4",
+                "laravel5",
+                "order",
+                "orderable",
+                "ordering",
+                "sort",
+                "sortable",
+                "sorting"
+            ],
+            "support": {
+                "issues": "https://github.com/boxfrommars/rutorika-sortable/issues",
+                "source": "https://github.com/boxfrommars/rutorika-sortable/tree/8.0.0"
+            },
+            "time": "2020-09-13T13:31:22+00:00"
         },
         {
             "name": "santigarcor/laratrust",
@@ -9766,6 +10214,49 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.3"
             },
             "time": "2020-07-13T06:12:54+00:00"
+        },
+        {
+            "name": "vkcom/vk-php-sdk",
+            "version": "5.101.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VKCOM/vk-php-sdk.git",
+                "reference": "46a8f76503050c0c6730359fc234a4d6448b8653"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VKCOM/vk-php-sdk/zipball/46a8f76503050c0c6730359fc234a4d6448b8653",
+                "reference": "46a8f76503050c0c6730359fc234a4d6448b8653",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6",
+                "vkcom/vk-api-schema": "^5.80.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "VK\\": "src/VK"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "VK PHP SDK",
+            "homepage": "https://github.com/VKCOM/vk-php-sdk",
+            "keywords": [
+                "sdk",
+                "vk"
+            ],
+            "support": {
+                "issues": "https://github.com/VKCOM/vk-php-sdk/issues",
+                "source": "https://github.com/VKCOM/vk-php-sdk/tree/5.101.0"
+            },
+            "time": "2019-08-16T12:13:20+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

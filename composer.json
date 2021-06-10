@@ -12,6 +12,7 @@
         "inetstudio/admin-panel": "^8.0",
         "inetstudio/feedback": "^8.0",
         "inetstudio/pages": "^8.0",
+        "inetstudio/social-contest": "^8.0",
         "inetstudio/sitemap": "^8.0",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
@@ -41,13 +42,17 @@
                 "inetstudio/admin-panel",
                 "inetstudio/cache",
                 "inetstudio/captcha",
+                "inetstudio/classifiers",
                 "inetstudio/feedback",
+                "inetstudio/instagram",
                 "inetstudio/meta",
                 "inetstudio/pages",
                 "inetstudio/search",
                 "inetstudio/simple-counters",
+                "inetstudio/social-contest",
                 "inetstudio/sitemap",
                 "inetstudio/uploads",
+                "inetstudio/vkontakte",
                 "inetstudio/widgets",
 
                 "barryvdh/laravel-debugbar",
@@ -76,6 +81,7 @@
             "Packages\\MainPagePackage\\MainPage\\": "packages/mainpage/entities/mainpage/src",
             "Packages\\MetaPackage\\Meta\\": "packages/meta/entities/meta/src",
             "Packages\\PagesPackage\\Pages\\": "packages/pages/entities/pages/src",
+            "Packages\\SocialContest\\Posts\\": "packages/social-contest/entities/posts/src",
             "Packages\\Uploads\\": "packages/uploads/entities/uploads/src"
         }
     },
