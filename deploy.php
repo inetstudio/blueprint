@@ -10,6 +10,9 @@ set('keep_releases', 5);
 // Project repository
 set('project_alias', 'project');
 set('repository', 'git@bitbucket.org:inet-studio/project.git');
+set('bin/php', function () {
+    return '/usr/bin/php8.0';
+});
 
 add('shared_files', []);
 add('shared_dirs', []);
@@ -30,6 +33,13 @@ inventory('hosts.yaml');
 
 // Tasks
 task('artisan:optimize', function () {});
+
+task('deploy:vendors', function () {
+    if (!commandExist('unzip')) {
+        warning('To speed up composer installation setup "unzip" command with PHP zip extension.');
+    }
+    run('cd {{release_path}} && {{bin/composer}} install --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --ignore-platform-reqs 2>&1');
+});
 
 // Copy assets to host
 task('copy:assets', function () {
@@ -69,7 +79,7 @@ after('copy:assets', 'copy:release');
 
 desc('Restart PHP-FPM service');
 task('php-fpm:restart', function () {
-    run('sudo systemctl restart php7.4-fpm.service');
+    run('sudo systemctl restart php8.0-fpm.service');
 });
 after('deploy:symlink', 'php-fpm:restart');
 

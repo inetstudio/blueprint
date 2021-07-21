@@ -186,7 +186,6 @@ return [
         InetStudio\Classifiers\Groups\Providers\BindingsServiceProvider::class,
         InetStudio\FeedbackPackage\Feedback\Providers\BindingsServiceProvider::class,
         InetStudio\Fns\Providers\BindingsServiceProvider::class,
-        InetStudio\Fns\Accounts\Providers\BindingsServiceProvider::class,
         InetStudio\Fns\Receipts\Providers\BindingsServiceProvider::class,
         Packages\MainPagePackage\MainPage\Providers\BindingsServiceProvider::class,
         InetStudio\MetaPackage\Meta\Providers\BindingsServiceProvider::class,

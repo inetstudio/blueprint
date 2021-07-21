@@ -9,7 +9,7 @@ definitions:
           - vendor/**
     - step: &assets
         name: Build assets
-        image: node
+        image: node:15
         script:
           - apt-get update && apt-get install -y git
           - yarn install

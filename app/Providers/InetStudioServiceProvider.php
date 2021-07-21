@@ -512,16 +512,6 @@ class InetStudioServiceProvider extends ServiceProvider
 
     protected function bootFnsPackage(): void
     {
-        // Accounts
-        if ($this->app->runningInConsole()) {
-            $this->commands(
-                [
-                    'InetStudio\Fns\Accounts\Console\Commands\GenerateAccountsCommand',
-                    'InetStudio\Fns\Accounts\Console\Commands\ResetAccountsBlockingCommand',
-                ]
-            );
-        }
-
         // Receipts
         if ($this->app->runningInConsole()) {
             $this->commands(

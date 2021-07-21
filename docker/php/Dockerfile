@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:8.0.3-fpm-alpine
 
 RUN mkdir -p /var/www/${COMPOSE_PROJECT_NAME}
 

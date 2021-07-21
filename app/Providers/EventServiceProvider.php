@@ -7,6 +7,9 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
+        'App\Events\AuditEvent' => [
+            'App\Listeners\LogActionListener',
+        ],
         'InetStudio\FeedbackPackage\Feedback\Contracts\Events\Front\SendItemEventContract' => [
             'InetStudio\FeedbackPackage\Feedback\Contracts\Listeners\SendEmailToAdminListenerContract',
         ],
