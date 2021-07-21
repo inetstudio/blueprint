@@ -2356,16 +2356,16 @@
         },
         {
             "name": "inetstudio/checks-contest",
-            "version": "v8.1.8",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inetstudio/checks-contest.git",
-                "reference": "56f06de98c0d8a66389f2a90b38e4df97ef928a6"
+                "reference": "69217a723595a55775208299af2e18116c1600dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inetstudio/checks-contest/zipball/56f06de98c0d8a66389f2a90b38e4df97ef928a6",
-                "reference": "56f06de98c0d8a66389f2a90b38e4df97ef928a6",
+                "url": "https://api.github.com/repos/inetstudio/checks-contest/zipball/69217a723595a55775208299af2e18116c1600dd",
+                "reference": "69217a723595a55775208299af2e18116c1600dd",
                 "shasum": ""
             },
             "require": {
@@ -2413,9 +2413,9 @@
             "homepage": "https://github.com/inetstudio/checks-contest",
             "support": {
                 "issues": "https://github.com/inetstudio/checks-contest/issues",
-                "source": "https://github.com/inetstudio/checks-contest/tree/v8.1.8"
+                "source": "https://github.com/inetstudio/checks-contest/tree/v8.1.9"
             },
-            "time": "2021-06-25T07:43:52+00:00"
+            "time": "2021-07-21T07:55:21+00:00"
         },
         {
             "name": "inetstudio/classifiers",
