@@ -184,7 +184,7 @@ return [
         InetStudio\ReceiptsContest\Statuses\Providers\BindingsServiceProvider::class,
         InetStudio\Classifiers\Entries\Providers\BindingsServiceProvider::class,
         InetStudio\Classifiers\Groups\Providers\BindingsServiceProvider::class,
-        InetStudio\FeedbackPackage\Feedback\Providers\BindingsServiceProvider::class,
+        Packages\FeedbackPackage\Feedback\Providers\BindingsServiceProvider::class,
         InetStudio\Fns\Providers\BindingsServiceProvider::class,
         InetStudio\Fns\Receipts\Providers\BindingsServiceProvider::class,
         Packages\MainPagePackage\MainPage\Providers\BindingsServiceProvider::class,

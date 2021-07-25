@@ -415,6 +415,7 @@ class InetStudioServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/routes/api.php');
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../../packages/receipts-contest/entities/receipts/routes/api.php');
 
         $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/checks-contest/entities/receipts/resources/views', 'admin.module.receipts-contest.receipts');
         $this->loadViewsFrom(__DIR__.'/../../packages/receipts-contest/entities/receipts/resources/views', 'packages.receipts-contest.receipts.app');

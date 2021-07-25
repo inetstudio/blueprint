@@ -78,6 +78,7 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
+            "Packages\\FeedbackPackage\\Feedback\\": "packages/feedback/entities/feedback/src",
             "Packages\\ReceiptsContest\\Receipts\\": "packages/receipts-contest/entities/receipts/src",
             "Packages\\ReceiptsContest\\Products\\": "packages/receipts-contest/entities/products/src",
             "Packages\\MainPagePackage\\MainPage\\": "packages/mainpage/entities/mainpage/src",
