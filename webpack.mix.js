@@ -3,7 +3,12 @@ require('dotenv').config();
 let packagesPath = './vendor/inetstudio',
     search = true;
 
+let lodash = require('lodash');
+let path = require('path');
 let mix = require('laravel-mix');
+let File = require('laravel-mix/src/File');
+let find = require('find');
+
 global.Mix.manifest.path = function () {
     return path.join('public/admin', this.name);
 };
@@ -20,7 +25,6 @@ global.Mix.manifest.hash = function (file) {
 
 if (search) {
     let fileSystem = require('fs');
-    let find = require('find');
 
     let files = find.fileSync(/app\.scss/, packagesPath);
     let content = '@import "./admin/project";\n';
@@ -36,17 +40,35 @@ if (search) {
     }
 }
 
-mix.setResourceRoot(process.env.APP_URL);
+let webpackConfig = {
+    output: {
+        chunkFilename: 'admin/js/chunks/[chunkhash].js',
+    },
+};
 
-mix.autoload({
-    jquery: ['$', 'jQuery']
+let webpackConfigFiles = find.fileSync(/package\.webpack\.config\.js/, packagesPath);
+
+webpackConfigFiles.forEach(function (file) {
+    const config = require(__dirname+'/'+file);
+
+    webpackConfig = lodash.merge(webpackConfig, config);
 });
 
 mix
+    .webpackConfig(webpackConfig)
+    .setResourceRoot(process.env.APP_URL)
+    .autoload({
+        jquery: ['$', 'jQuery']
+    })
     .js([
         packagesPath+'/admin-panel/resources/assets/js/app.js',
+        'packages/receipts-contest/entities/receipts/resources/assets/js/app.js',
         'resources/assets/js/admin/project/app.js',
     ], 'admin/js/app.js')
+    .vue({
+        extractStyles: true,
+        globalStyles: false
+    })
     .extract([
         'jquery',
         'bootstrap',
@@ -65,6 +87,14 @@ mix
             uglifyOptions: {
                 mangle: true,
                 compress: false, // The slow bit
+            }
+        },
+        terser: {
+            extractComments: (astNode, comment) => false,
+            terserOptions: {
+                format: {
+                    comments: false,
+                }
             }
         }
     })

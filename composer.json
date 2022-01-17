@@ -17,6 +17,7 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "mcaskill/composer-exclude-files": "^2.0",
+        "rebing/graphql-laravel": "^8.1",
         "sentry/sentry-laravel": "^2.1.1"
     },
     "require-dev": {
@@ -30,7 +31,11 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "mcaskill/composer-exclude-files": true
+        }
     },
     "extra": {
         "exclude-from-files": [

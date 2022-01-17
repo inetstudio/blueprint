@@ -2,23 +2,23 @@
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
 
-            <li class="{{ isActiveRoute(['back.pages.*']) }}">
+            <li class="{{ isActiveRoute(['back.pages.*'], 'mm-active') }}">
                 <a href="#"><i class="fa fa-pencil-alt"></i> <span class="nav-label">Контент </span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
+                <ul class="nav nav-second-level">
                     @include('admin.module.pages::back.includes.navigation')
                 </ul>
             </li>
 
-            <li class="{{ isActiveRoute(['back.classifiers.*']) }}">
+            <li class="{{ isActiveRoute(['back.classifiers.*'], 'mm-active') }}">
                 <a href="#"><i class="fa fa-copy"></i> <span class="nav-label">Справочники </span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
+                <ul class="nav nav-second-level">
                     @include('admin.module.classifiers::back.includes.navigation')
                 </ul>
             </li>
 
-            <li class="{{ isActiveRoute(['back.feedback.*']) }}">
+            <li class="{{ isActiveRoute(['back.feedback.*'], 'mm-active') }}">
                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Данные </span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
+                <ul class="nav nav-second-level">
                     @include('admin.module.feedback::back.includes.navigation')
                 </ul>
             </li>

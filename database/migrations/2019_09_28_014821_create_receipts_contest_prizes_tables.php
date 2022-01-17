@@ -17,6 +17,7 @@ class CreateReceiptsContestPrizesTables extends Migration
             $table->id();
             $table->string('name');
             $table->string('alias');
+            $table->integer('limit');
             $table->timestamps();
             $table->softDeletes();
         });

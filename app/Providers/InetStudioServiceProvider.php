@@ -639,9 +639,14 @@ class InetStudioServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__.'/../../vendor/inetstudio/widgets/entities/widgets/routes/web.php');
 
-        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/widgets/entities/widgets/resources/views', 'admin.module.widgets');
+        $this->loadViewsFrom(__DIR__.'/../../vendor/inetstudio/widgets/entities/widgets/resources/views', 'inetstudio.widgets-package.widgets');
 
         if (! $this->configIsCached) {
+            $this->mergeConfigFrom(
+                __DIR__.'/../../vendor/inetstudio/widgets/entities/widgets/config/inetstudio.widgets-package.widgets.php',
+                'inetstudio.widgets-package.widgets'
+            );
+
             $this->mergeConfigFrom(
                 __DIR__.'/../../vendor/inetstudio/widgets/entities/widgets/config/filesystems.php', 'filesystems.disks'
             );
@@ -649,14 +654,22 @@ class InetStudioServiceProvider extends ServiceProvider
 
         FormBuilder::component(
             'widgets',
-            'admin.module.widgets::back.forms.fields.widgets',
+            'inetstudio.widgets-package.widgets::back.forms.fields.widgets',
             ['name' => null, 'value' => null, 'attributes' => null]
         );
 
         Blade::directive('widget', function ($expression) {
-            $widgetsService = app()->make('InetStudio\WidgetsPackage\Widgets\Contracts\Services\Front\ItemsServiceContract');
+            $renderAction = resolve('InetStudio\WidgetsPackage\Widgets\Contracts\Actions\Front\RenderActionContract');
+            $renderData = resolve(
+                'InetStudio\WidgetsPackage\Widgets\Contracts\DTO\Actions\Front\RenderItemDataContract',
+                [
+                    'args' => [
+                        'id' => $expression,
+                    ],
+                ]
+            );
 
-            return $widgetsService->getItemContent($expression);
+            return $renderAction->execute($renderData);
         });
     }
 }

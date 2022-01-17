@@ -2,11 +2,14 @@ definitions:
   steps:
     - step: &composer
         name: Install PHP packages
-        image: composer
+        image: composer:2.1.11
         script:
           - composer install --no-scripts --ignore-platform-reqs
+          - mv .env.$BITBUCKET_BRANCH .env
+          - php artisan ziggy:generate ./resources/assets/front/js/helpers/routes.js --group=front
         artifacts:
           - vendor/**
+          - resources/assets/front/js/helpers/**
     - step: &assets
         name: Build assets
         image: node:15
@@ -15,9 +18,11 @@ definitions:
           - yarn install
           - mv .env.$BITBUCKET_BRANCH .env
           - npm run $BITBUCKET_BRANCH
+          - npm run front-$BITBUCKET_BRANCH
         artifacts:
           - .env
           - public/admin/**
+          - public/front/**
     - step: &deploy
         name: Deploy to server
         image: pipelinecomponents/deployer

@@ -16,14 +16,15 @@ class EventServiceProvider extends ServiceProvider
         'InetStudio\PagesPackage\Pages\Contracts\Events\Back\ModifyItemEventContract' => [
             'Packages\PagesPackage\Pages\Listeners\Front\ClearItemCache',
         ],
+        /*
         'InetStudio\ReceiptsContest\Receipts\Contracts\Events\Back\ModerateItemEventContract' => [
-            'InetStudio\ReceiptsContest\Receipts\Contracts\Listeners\ItemStatusChangeListenerContract'
-        ],
-        'InetStudio\ReceiptsContest\Receipts\Contracts\Events\Front\SendItemEventContract' => [
             'InetStudio\ReceiptsContest\Receipts\Contracts\Listeners\ItemStatusChangeListenerContract'
         ],
         'InetStudio\ReceiptsContest\Receipts\Contracts\Events\Back\SetWinnerEventContract' => [
             'InetStudio\ReceiptsContest\Receipts\Contracts\Listeners\Back\SetWinnerListenerContract'
+        ],*/
+        'InetStudio\ReceiptsContest\Receipts\Contracts\Events\Front\SendItemEventContract' => [
+            'Packages\ReceiptsContest\Receipts\Listeners\ProcessListener',
         ],
     ];
 
