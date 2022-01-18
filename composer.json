@@ -33,7 +33,6 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "composer/package-versions-deprecated": true,
             "mcaskill/composer-exclude-files": true
         }
     },
